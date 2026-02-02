@@ -1,0 +1,79 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #b3d7c1;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 500px; /* Could be more or less, depending on screen size */
+    height: 490px;
+    border-radius: 30px;
+    margin-top: -20px;
+}
+
+/* Modal Content Fields */
+.field input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.field label {
+    font-size: 14px;
+}
+
+.show-password label {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.yin input {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+}
+
+.yin input:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.sign, #forgot-password-msg {
+    text-align: center;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 300px) {
+    .modal-content {
+        width: 100%; /* Full width on smaller screens */
+        height: auto; /* Adjust height for smaller screens */
+    }
+
+    .field input {
+        width: 100%;
+    }
+
+    .yin input {
+        width: 100%;
+    }
+}

@@ -1,0 +1,364 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Background with Unique Blended Colors */
+body {
+    background: linear-gradient(to right, #ffecd2, #fcb69f, #ff9a9e);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+
+
+.hed {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background: #2b2b2b;
+    backdrop-filter: blur(4px);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    top: 0;
+    z-index: 1; /* Lower z-index to push it behind other elements */
+}
+
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 1300px;
+}
+
+/* Section Heading */
+h1, h2 {
+    color: #d35400;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+/* Recipe List */
+.Nav ul{
+    margin-left: 1050px;
+    margin-bottom: 0px;
+    display: flex;
+    list-style: none;
+}
+
+.Nav ul li a{
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 30px 20px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.Nav ul li a:hover{
+    color: #213032;
+    background-color: #97a2a3;
+    cursor: pointer;
+}
+
+.count{
+    color: red;
+}
+/* Form Container */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    margin: 70px auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s;
+}
+
+.disabled-link {
+    pointer-events: none;
+    color: grey;
+    text-decoration: none;
+    cursor: default;
+}
+
+
+.modal-content h1 {
+    text-align: center;
+    color: #d35400;
+}
+
+.field {
+    position: relative;
+    margin: 15px 0;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.field input:focus ~ label, .field input:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 0.8rem;
+    color: #d35400;
+}
+
+.messages {
+    color: red;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.show-password input {
+    margin-right: 5px;
+}
+
+.yin input {
+    width: 100%;
+    padding: 10px;
+    background: #d35400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+
+.sign, #forgot-password-msg {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.sign a, .reset {
+    color: #d35400;
+}
+
+.sign a:hover, .reset:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 176vh; /* Full viewport height for the container */
+}
+  
+.content {
+    flex: 10px; /* Fills available space, pushing the footer to the bottom */
+}
+  
+.custom-footer {
+    background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent for blending */
+    color: #fff; /* White text for contrast */
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background-image: url('your-image-url.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-blend-mode: darken;
+    border-top: 3px solid #ffc107; /* Golden divider line */
+}
+
+.custom-footer .footer-content p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.custom-footer a {
+    color: #ffc107; /* Gold for food theme */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.custom-footer a:hover {
+    color: #ff5733; /* Highlight with bright orange */
+}
+
+.custom-footer a[target="_blank"]::after {
+    content: " 🔗"; /* Adds a subtle link icon for external links */
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .custom-footer .footer-content p {
+        font-size: 12px;
+    }
+}
+
+
+/* nav */
+
+.hed {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background: #2b2b2b;
+}
+
+
+.logo p{
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: -1225px;
+    margin-top: -10px;
+    color: whitesmoke;
+}
+
+
+.Nav ul {
+    margin: 0; /* Remove default margin */
+    padding: 0 200px; /* Remove default padding */
+    display: flex; /* Align items in a row */
+    list-style: none; /* Remove bullet points */
+    position: absolute; /* Positioning the nav bar */
+    top: 0; /* Align to the top of the page */
+    right: 0; /* Align to the right of the page */
+}
+
+.Nav ul li a {
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 30px 30px; /* Adjust padding for spacing */
+    margin: 0 5px; /* Space between links */
+    text-decoration: none;
+    transition: all 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.Nav ul li a:hover {
+    color: #213032;
+    background-color: #97a2a3;
+    cursor: pointer;
+}
+
+
+#colorings{
+    color: red;
+    font-size: 15px;
+}
+
+.colorings{
+    color: red;
+    font-size: 15px;
+}
+
+
+/* Header Animation */
+@keyframes nav {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Background */
+.backs {
+    height: 120vh;
+    width: 100%;
+    background: url('backs2.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+
+
+
+/* Change the cursor to "not-allowed" when login button is disabled */
+#login-button:disabled {
+    cursor: not-allowed;
+}
+
+/* Change the cursor to "not-allowed" when the username or password fields are disabled */
+input:disabled, select:disabled, textarea:disabled {
+    cursor: not-allowed;
+}
+
+/* Change the cursor to "wait" when the countdown is running (optional) */
+#countdown-display {
+    cursor: wait;
+}
+
+/* Style for the disabled link (register link) */
+.disabled-link {
+    pointer-events: none;
+    color: grey;
+    text-decoration: none;
+    cursor: default; /* Prevent interaction */
+}
+
+
+/* Add margin or padding to visually separate the two messages */
+#forgot-password-msg {
+    margin-top: 10px; /* Adds spacing on top of forgot password message */
+    color: #007bff; /* Optional: Blue color for 'Forgot Password?' message */
+    font-weight: bold;
+}
+
+#countdown-display {
+    margin-top: 15px; /* Adds more spacing for the countdown timer */
+    color: #dc3545; /* Optional: Red color for countdown timer */
+    font-weight: bold;
+    font-size: 14px;
+}
+

@@ -1,0 +1,6 @@
+<FilesMatch "\.php$">
+    <If "%{HTTP_REFERER} =~ m#^http://localhost/Recipe_Food_Finder/#">
+        Require all granted
+    </If>
+    Require all denied
+</FilesMatch>

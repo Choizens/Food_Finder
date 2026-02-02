@@ -1,0 +1,25 @@
+@import url(modal.css);
+
+@import url(dummy.css);
+
+.back-button.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Prevent clicking */
+}
+
+.arrow-left, .arrow-right {
+    font-size: 20px;
+    color: white;
+}
+
+#back-button.disabled {
+    opacity: 0.5; /* Make it look inactive */
+    pointer-events: none; /* Disable interaction */
+    cursor: not-allowed; /* Change cursor */
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+

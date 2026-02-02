@@ -1,0 +1,235 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.hed {
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background: #F29400;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.backs{
+    height: 665px;
+    width: 100%;
+    background: url(b1.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.logo p{
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: -10px;
+    margin-top: -60px;
+    color: #213032;
+
+    /* Animation Adjustment*/
+
+    animation-name:logs;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-in;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+}
+
+/* Animation start IN P*/
+@keyframes logs{
+    from{
+        transform: translateX(-300px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+
+
+/* Animation ends IN P*/
+
+
+.Nav ul{
+    margin-left: 800px;
+    margin-bottom: 0px;
+    display: flex;
+    list-style: none;
+
+    animation-name: nav;
+    animation-duration: 0.9s;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+    animation-timing-function: ease-in;
+}
+
+/* Animation start IN P*/
+@keyframes nav{
+    from{
+        transform: translateY(-50px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+/* Animation ends IN P*/
+
+.Nav ul li a{
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 30px 25px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.Nav ul li a:hover{
+    color: #213032;
+    background: linear-gradient(#F7DCB9,#F7DCB9);
+    cursor: pointer;
+}
+
+/* Body below */
+
+.center{
+    margin-left: 710px;
+    margin-top: -20px;
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #F29400;
+    border-radius: 10px;
+    height: 385px;
+}
+
+
+.center h1{
+    text-align: center;
+    padding:  0 0 20px 0;
+}
+
+.center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.field{
+    position: relative;
+    border-bottom: 2px solid white;
+    margin: 30px 0;
+}
+
+.field input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+
+.field label{
+    position: absolute;
+    margin-top: 10px;
+    left: 40px;
+    color: black;
+    transform: translate(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 1.5s;
+}
+
+.field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transition: .5s;
+}
+
+.field input:focus ~ label,
+.field input:valid ~ label{
+    top: -25px;
+    color: black;
+}
+
+.field input:focus ~ span::before,
+.field input:valid ~ span::before{
+    width: 100px;
+}
+
+
+.yin input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: white;
+    border-radius: 25px;
+    font-size: 18px;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.yin input:hover{
+    border-color: bisque;
+}
+
+
+/*Carousel*/
+
+.carousell {
+    position: relative;
+    width: 1354px;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.pen1 {
+    width: 100%;
+    height: 30px;
+    margin-top: -53px;
+}
+
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    user-select: none;
+    transition: 0.6s ease;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}

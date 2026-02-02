@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Delights - Login</title>
+    <link rel="stylesheet" href="style/base.css">
+    <script src="Jscript/logscript.js"></script>
+</head>
+<body class="backs">
+    <header class="hed">
+        <div class="logo">
+            <p>Flavoursome Recipe</p>
+        </div>
+        <nav class="Nav">
+            <ul>
+                <li><a href="base.html">Home</a></li>
+                <li><a href="Register.html">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <form class="modal-content animate" action="Phpfile/logs.php" method="POST" onsubmit="handleLogin(event)">
+            <h1>Login</h1>
+
+        <div class="field">
+            <input type="text" name="username" id="username" required placeholder=" ">
+            <label>Username</label>
+        </div>
+
+        <div class="field">
+            <input type="password" id="password" name="password" required placeholder=" ">
+            <label>Password</label>
+        </div>
+
+        <p id="mess" class="messages"></p>
+
+        <div class="show-password">
+            <input type="checkbox" id="show-password" class="box" onclick="togglePasswordVisibility()">
+            <label for="show-password">Show Password</label>
+        </div>
+        <br>    
+
+        <div class="yin">
+                <input type="submit" id="login-button" value="Login">
+            </div>
+
+            <div id="countdown-display" class="count"></div>
+    
+            <div id="forgot-password-msg" class="forgot-box" style="display: none;">
+                Forgot Password? <a href="Forgot_password.html" class="reset">Click here to reset.</a>
+            </div><br>
+    
+            <div class="sign">
+                Don't have an account? <a href="Register.html" id="register-link">Sign-up</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="custom-footer">
+        <div class="footer-content">
+          <p>&copy; 2026 Recipe Finder System. All rights reserved.</p>
+          <p>Contact Us: <a href="mailto:knightcyberg@gmail.com">knightcyberg@gmail.com</a></p>
+          <p>
+            Follow us:
+            <a href="#">Facebook</a> | <a href="#">YouTube</a> | <a href="#">Instagram</a>
+          </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<?php include 'Phpfile/questions.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="path/to/sweetalert2.min.js"></script> <!-- Include SweetAlert2 JS -->
+    <title>Register</title>
+</head>
+<body>
+    <header class="hed">
+        <div>
+            <div class="Nav">
+                <ul>
+                    <li><a href="base.html">Home</a></li>
+                    <li><a href="home.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo">
+            <label><p>Flavoursome Recipe</p></label>
+        </div>
+    </header>
+    <div class="backs"></div>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <!-- action="Phpfile/recon.php" onsubmit="return validateForm(event) -->
+        <form id="registrationForm" action="Phpfile/recon.php" method="POST" onsubmit="return validateForm(event)">
+            <div class="container1">
+                <div class="form-headers">
+                    <center><h2 style="color: #d35400;">Personal Information</h2></center><br>
+                </div>
+
+                <div class="form-row">
+                    <div class="label"> 
+                        <label for="idNo">ID No<span class="asters">*</span></label>
+                        <input type="text" id="idInput" name="idno" placeholder="xxxx-xxxx"  class="pen" oninput="validateNumber(this)" maxlength="9">
+                        <p id="message3" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+
+                    <div class="label"> 
+                        <label for="firstName">Firstname<span class="asters">*</span></label>
+                        <input type="text" id="firstName" name="firstname"  class="pen" oninput="validateName(this)" maxlength="30">
+                        <label for="message" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="middleInitial">
+                            Middle Name<span class="asters">*</span> <span style="font-size: 15px; color: red;">(Optional)</span>
+                        </label>
+
+                        <input 
+                            type="text" 
+                            id="middleInitial" 
+                            name="middleinitial"
+                            class="pen" 
+                            oninput="validateMid(this)"
+                            maxlength="30"
+                        >
+                        <label for="message12" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="lastName">Last Name<span class="asters">*</span></label>
+                        <input type="text" id="lastName" name="lastname" class="pen" oninput="validateLast(this)" maxlength="20">
+                        <label for="message2" style="color: red; font-size: 15px;"></label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="label"> 
+                        <label for="extensionName">
+                            Extension Name<span class="asters">*</span> <span style="font-size: 15px; color: red;">(Optional)</span>
+                        </label>
+                        <input type="text" id="extensionName" name="exname" class="pen"  maxlength="4" oninput="validateEx(this)">
+                        <p id="message22" class="mess" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+                    <div class="label"> 
+                        <label for="sex">Sex<span class="asters">*</span></label>
+                        <select id="sex" name="Sex" class="pen" oninput="validateSex(this)">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                        <p id="message90" class="mess" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+                    <div class="label">
+                        <label class="custom-birthdate-label" for="custom-birthdate">Select your birthdate<span class="asters">*</span></label>
+                        <input
+                            class="custom-birthdate-input"
+                            type="date"
+                            id="custom-birthdate"
+                            name="birthdate"
+                            onchange="calculateAge()">
+                        <label id="message16" style="color: red; font-size: 15px;"></label>
+                    </div>
+                    <div class="label">
+                        <label class="custom-age-label" for="custom-age">Your Age<span class="asters">*</span></label>
+                        <input
+                            class="custom-age-input"
+                            type="number"
+                            id="custom-age"
+                            name="age"
+                            readonly>
+                    </div>
+                </div>
+                <div class="form-headers">
+                    <center><h2 style="color: #d35400;">Account Information</h2></center><br>
+                </div>
+
+                <div class="form-row">
+                    <div class="label"> 
+                        <label for="email">Email<span class="asters">*</span></label>
+                        <input type="text" id="emailInput" name="email" class="pen" oninput="validateEmail(this)" maxlength="30">
+                        <p id="message5" class="mess" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+
+                    <div class="label"> 
+                        <label for="username">Username<span class="asters">*</span></label>
+                        <input type="text" id="username" name="username" class="pen" oninput="validateUser(this)" maxlength="20">
+                        <p id="message4" class="mess" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+
+                    <div class="label">
+                        <label for="password">Password<span class="asters">*</span></label>
+                        <input type="password" name="password"  id="password"  class="pen" oninput="validatePasswordStrength(this.value)" >
+                        <div class="mess">
+                            <p id="mess" style="display:none;"><span id="stret"></span></p>
+                        </div>
+                        <p id="message95" class="mess" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                        <div class="show-password">
+                            <input type="checkbox" onclick="togglePassword('password')"> <span>Show Password</span>
+                        </div>
+                    </div>
+                    
+                    <div class="label">
+                        <label for="confirmPassword">Confirm Password<span class="asters">*</span></label>
+                        <input 
+                            type="password" 
+                            name="repassword" 
+                            id="confirmPassword" 
+                            class="pen" 
+                            oninput="validatePasswordMatch(document.getElementById('password').value, this.value, document.getElementById('message100'))">
+                        <label for="message100" id="message100" style="color: red; font-size: 15px;"></label>
+                        <div class="show-password">
+                            <input type="checkbox" onclick="togglePassword('confirmPassword')"> <span>Show Password</span>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="form-headers">
+                    <center><h2 style="color: #d35400;">Security Verification</h2></center><br>
+                </div>
+
+                <div class="form-row">
+                    <div class="label">
+                        <label>Security Question 1<span class="asters">*</span></label>
+                        <select name="security_q1" class="pen" onchange="validateSecurityAnswer(1)">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        <input type="text" name="answer1" id="answer1" class="pen" placeholder="Your Answer" style="margin-top: 5px;" oninput="validateSecurityAnswer(1)">
+                        <p id="error-q1" style="color: red; font-size: 14px; margin-top: 5px;"></p>
+                    </div>
+
+                    <div class="label">
+                        <label>Security Question 2<span class="asters">*</span></label>
+                        <select name="security_q2" class="pen" onchange="validateSecurityAnswer(2)">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        <input type="text" name="answer2" id="answer2" class="pen" placeholder="Your Answer" style="margin-top: 5px;" oninput="validateSecurityAnswer(2)">
+                        <p id="error-q2" style="color: red; font-size: 14px; margin-top: 5px;"></p>
+                    </div>
+
+                    <div class="label">
+                        <label>Security Question 3<span class="asters">*</span></label>
+                        <select name="security_q3" class="pen" onchange="validateSecurityAnswer(3)">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        <input type="text" name="answer3" id="answer3" class="pen" placeholder="Your Answer" style="margin-top: 5px;" oninput="validateSecurityAnswer(3)">
+                        <p id="error-q3" style="color: red; font-size: 14px; margin-top: 5px;"></p>
+                    </div>
+                </div>
+
+                <div class="form-header"><br>
+                    <h2 style="color: #d35400;" >Address Information</h2>
+                </div><br>
+
+                <div class="form-row">
+                    <div class="label"> 
+                        <label for="purok">Purok<span class="asters">*</span></label>
+                        <input type="text" id="purok" name="Purok" class="pen" oninput="validatePurok(this)">
+                        <label for="message96" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="barangay">Barangay<span class="asters">*</span></label>
+                        <input type="text" id="barangay" name="Barangay" class="pen" oninput="validateBarangay(this)">
+                        <label for="message7" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="city">City/Municipality<span class="asters">*</span></label>
+                        <input type="text" id="city" name="City" class="pen" oninput="validateCity(this)">
+                        <label for="message8" style="color: red; font-size: 15px;"></label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="label"> 
+                        <label for="country">Country<span class="asters">*</span></label>
+                        <input type="text" id="country" name="Country" class="pen" oninput="validateCountry(this)">
+                        <label for="message10" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="province">Province<span class="asters">*</span></label>
+                        <input type="text" id="province" name="Province" class="pen"  oninput="validateProvince(this)">
+                        <label for="message9" style="color: red; font-size: 15px;"></label>
+                    </div>
+
+                    <div class="label"> 
+                        <label for="zipCode">ZIP Code<span class="asters">*</span></label>  
+                        <input type="text" id="zipCode" name="Z_code"  class="pen" oninput="validateZip(this)" maxlength="4">
+                        <p id="message11" style="color: red; font-size: 15px;"></p> <!-- The message will appear here -->
+                    </div>
+                </div>
+
+                <button type="submit" name="signup" class="bot">SIGN-UP</button>
+                
+                <div class="back-link">
+                    <span>Want to Login?</span>
+                    <a href="home.html">Click Here!</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="page-container">
+        <!-- Main Content -->
+      
+        <!-- Footer -->
+        <footer class="custom-footer">
+          <div class="footer-content">
+            <p>&copy; Recipe Finder System. All rights reserved.</p>
+            <p>Contact Us: <a href="mailto:knightcyberg@gmail.com">knightcyberg@gmail.com</a> | Phone: +123-456-7890</p>
+            <p>
+              Follow us:
+              <a href="https://facebook.com/yourpage" target="_blank">Facebook</a> |
+              <a href="https://youtube.com/yourchannel" target="_blank">YouTube</a> |
+              <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
+            </p>
+            <p>
+              <a href="#">Privacy Policy</a> | 
+              <a href="#">Terms of Service</a>
+            </p>
+          </div>
+        </footer>
+    </div>
+    <script src="Jscript/java.js"></script>
+    <script src="Jscript/get_question.js"></script>
+</body>
+</html>
+
+
+

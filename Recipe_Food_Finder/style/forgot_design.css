@@ -1,0 +1,569 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Background with Unique Blended Colors */
+body {
+    background: linear-gradient(to right, #ffecd2, #fcb69f, #ff9a9e);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+
+
+.hed {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background: #2b2b2b;
+    backdrop-filter: blur(4px);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    top: 0;
+    z-index: 1; /* Lower z-index to push it behind other elements */
+}
+
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 1300px;
+}
+
+/* Section Heading */
+h1, h2 {
+    color: #d35400;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+/* Recipe List */
+.Nav ul{
+    margin-left: 1050px;
+    margin-bottom: 0px;
+    display: flex;
+    list-style: none;
+}
+
+.Nav ul li a{
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 30px 20px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.Nav ul li a:hover{
+    color: #213032;
+    background-color: #97a2a3;
+    cursor: pointer;
+}
+
+.count{
+    color: red;
+}
+/* Form Container */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    margin: 70px auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s;
+}
+
+.disabled-link {
+    pointer-events: none;
+    color: grey;
+    text-decoration: none;
+    cursor: default;
+}
+
+
+.modal-content h1 {
+    text-align: center;
+    color: #d35400;
+}
+
+.field {
+    position: relative;
+    margin: 15px 0;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.field input:focus ~ label, .field input:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 0.8rem;
+    color: #d35400;
+}
+
+.messages {
+    color: red;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.show-password input {
+    margin-right: 5px;
+}
+
+.yin input {
+    width: 100%;
+    padding: 10px;
+    background: #d35400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+
+.sign, #forgot-password-msg {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.sign a, .reset {
+    color: #d35400;
+}
+
+.sign a:hover, .reset:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 176vh; /* Full viewport height for the container */
+}
+  
+.content {
+    flex: 10px; /* Fills available space, pushing the footer to the bottom */
+}
+  
+.custom-footer {
+    background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent for blending */
+    color: #fff; /* White text for contrast */
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background-blend-mode: darken;
+    border-top: 3px solid #ffc107; /* Golden divider line */
+}
+
+.custom-footer .footer-content p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.custom-footer a {
+    color: #ffc107; /* Gold for food theme */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.custom-footer a:hover {
+    color: #ff5733; /* Highlight with bright orange */
+}
+
+.custom-footer a[target="_blank"]::after {
+    content: " 🔗"; /* Adds a subtle link icon for external links */
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .custom-footer .footer-content p {
+        font-size: 12px;
+    }
+}
+
+
+/* nav */
+
+.hed {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    background: #2b2b2b;
+}
+
+
+.logo p{
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: -1225px;
+    margin-top: -10px;
+    color: whitesmoke;
+}
+
+
+.Nav ul {
+    margin: 0; /* Remove default margin */
+    padding: 0 200px; /* Remove default padding */
+    display: flex; /* Align items in a row */
+    list-style: none; /* Remove bullet points */
+    position: absolute; /* Positioning the nav bar */
+    top: 0; /* Align to the top of the page */
+    right: 0; /* Align to the right of the page */
+}
+
+.Nav ul li a {
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 30px 30px; /* Adjust padding for spacing */
+    margin: 0 5px; /* Space between links */
+    text-decoration: none;
+    transition: all 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.Nav ul li a:hover {
+    color: #213032;
+    background-color: #97a2a3;
+    cursor: pointer;
+}
+
+
+#colorings{
+    color: red;
+    font-size: 15px;
+}
+
+.colorings{
+    color: red;
+    font-size: 15px;
+}
+
+
+/* Header Animation */
+@keyframes nav {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Background */
+.backs {
+    height: 120vh;
+    width: 100%;
+    background: url('backs2.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+
+
+
+/* Change the cursor to "not-allowed" when login button is disabled */
+#login-button:disabled {
+    cursor: not-allowed;
+}
+
+/* Change the cursor to "not-allowed" when the username or password fields are disabled */
+input:disabled, select:disabled, textarea:disabled {
+    cursor: not-allowed;
+}
+
+/* Change the cursor to "wait" when the countdown is running (optional) */
+#countdown-display {
+    cursor: wait;
+}
+
+/* Style for the disabled link (register link) */
+.disabled-link {
+    pointer-events: none;
+    color: grey;
+    text-decoration: none;
+    cursor: default; /* Prevent interaction */
+}
+
+
+/* Add margin or padding to visually separate the two messages */
+#forgot-password-msg {
+    margin-top: 10px; /* Adds spacing on top of forgot password message */
+    color: #007bff; /* Optional: Blue color for 'Forgot Password?' message */
+    font-weight: bold;
+}
+
+#countdown-display {
+    margin-top: 15px; /* Adds more spacing for the countdown timer */
+    color: #dc3545; /* Optional: Red color for countdown timer */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.step-wizard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+.step {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ccc;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 2;
+}
+.step.active {
+    background: #d35400;
+}
+.step-text {
+    font-size: 14px;
+    color: #d35400;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Modern Step Wizard Dots */
+.step-wizard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+    padding: 0 10px;
+}
+
+.step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-container p {
+    font-size: 11px;
+    margin-top: 8px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: 0.4s ease;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.step.active {
+    background: #d35400;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(211, 84, 0, 0.3);
+}
+
+/* The horizontal line behind the dots */
+.progress-line {
+    position: absolute;
+    top: 17px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: #eee;
+    z-index: 1;
+}
+
+/* Cleaner Dropdown for Step 3 */
+.pen {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    appearance: none; /* Modern look */
+}
+
+/* Professional Input Polish */
+.field input:focus {
+    border-color: #d35400;
+    background: #fff;
+}
+
+.step-text {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.yin input:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(211, 84, 0, 0.2);
+}
+
+.timer-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+#send-otp-btn:disabled {
+    background: #a1a1a1;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Container for the progress indicators */
+.step-wizard {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    z-index: 1;
+}
+
+/* The background gray line */
+.progress-line {
+    position: absolute;
+    top: 20px; /* Aligns with the middle of the circles */
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    z-index: -1;
+}
+
+/* The active orange line that grows */
+.progress-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress-width, 0%); /* Controlled by JS */
+    background: #d35400; /* Your orange theme */
+    transition: width 0.3s ease;
+}
+
+/* Ensure active dots are orange */
+.step.active {
+    background-color: #d35400 !important;
+    color: white !important;
+    border-color: #d35400 !important;
+}
+
+/* Container for the input and label */
+.field {
+    position: relative;
+    margin-top: 25px;
+}
+
+/* Base style for the label */
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background-color: #fff; /* Match your modal background */
+    padding: 0 5px;
+}
+
+/* Move label up on focus or when input is NOT empty */
+.field input:focus ~ label,
+.field input:not(:placeholder-shown) ~ label,
+.field select:focus ~ label,
+.field select:not([value=""]) ~ label {
+    top: 0;
+    font-size: 12px;
+    color: #d35400; /* Your orange brand color */
+    font-weight: bold;
+}
+
+/* Ensure placeholder is technically present but invisible to trigger :placeholder-shown */
+.field input::placeholder {
+    color: transparent;
+}

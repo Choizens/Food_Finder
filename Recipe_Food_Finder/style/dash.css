@@ -1,0 +1,211 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial, sans-serif';
+}
+
+/* Background with Unique Blended Colors */
+body {
+    background: linear-gradient(to right, #ffecd2, #fcb69f, #ff9a9e);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+header {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Heading */
+h1, h2 {
+    color: #d35400;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+/* Recipe List */
+ul {
+    list-style: none;
+}
+
+ul li {
+    background: #ffeaa7;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+}
+
+a {
+    color: #d35400;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Logo Styling */
+.logo p {
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 0;
+    color: whitesmoke;
+}
+
+/* Navigation Bar */
+.Nav ul {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
+
+.Nav ul li a {
+    display: block;
+    color: #edffef;
+    font-size: 20px;
+    padding: 15px 20px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.Nav ul li a:hover {
+    color: #213032;
+    background-color: #97a2a3;
+    cursor: pointer;
+}
+
+/* Form Container */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s;
+}
+
+.modal-content h1 {
+    text-align: center;
+    color: #d35400;
+}
+
+.field {
+    position: relative;
+    margin: 15px 0;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.field input:focus ~ label, .field input:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 0.8rem;
+    color: #d35400;
+}
+
+.messages {
+    color: red;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.show-password input {
+    margin-right: 5px;
+}
+
+.yin input {
+    width: 100%;
+    padding: 10px;
+    background: #d35400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.yin input:hover {
+    background: #e67e22;
+}
+
+.sign, #forgot-password-msg {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.sign a, .reset {
+    color: #d35400;
+}
+
+.sign a:hover, .reset:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
