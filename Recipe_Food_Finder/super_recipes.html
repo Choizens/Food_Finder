@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/admin_dashboard.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
+    <title>Flavoursome - Recipes Library</title>
+</head>
+
+<body>
+    <!-- Hidden User Session Data -->
+    <div id="userSessionData" style="display: none;">
+        <span id="userEmail"></span>
+        <span id="userFullName"></span>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <span class="sidebar-logo-name">Flavoursome</span>
+                <span class="sidebar-logo-tagline">Super Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <nav class="sidebar-menu">
+            <!-- Main Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Main</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_dashboard.html#dashboard" class="sidebar-menu-link" data-section="dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_requests.html#requests" class="sidebar-menu-link" data-section="requests">
+                            <i class="fas fa-bell"></i>
+                            <span>Administrative Requests</span>
+                            <span id="requestCountBadge" class="badge-counter" style="display:none; background: #EF4444; color: white; border-radius: 10px; padding: 2px 6px; font-size: 0.7em; margin-left: auto;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Management Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Management</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_users.html#users" class="sidebar-menu-link" data-section="users">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipe_requests.html#recipes" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-tasks"></i>
+                            <span>Recipe Requests</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipes.html#recipesModule" class="sidebar-menu-link active" data-section="recipesModule">
+                            <i class="fas fa-utensils"></i>
+                            <span>Recipes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_logs.html#logs" class="sidebar-menu-link" data-section="logs">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Activity Logs</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_settings.html#settings" class="sidebar-menu-link" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>System Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name" id="sidebarUsername">Super Admin</div>
+                    <div class="sidebar-user-role">Super Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-title">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="pageTitle">Recipes Library</h1>
+                        <div class="nav-breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span id="breadcrumbCurrent">Library</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">0</span>
+                    </div>
+                    <button class="profile-btn">
+                        <i class="fas fa-user-shield"></i>
+                        <span id="navUsername">Super Admin</span>
+                    </button>
+
+                    <button class="logout-btn-red" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- DASHBOARD SECTION -->
+        <div id="recipesModuleSection">
+             <section class="recipes-management">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Recipes Library</h2>
+                        <button class="refresh-btn" onclick="loadLibraryRecipes()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div id="libraryContainer" class="recipes-list">
+                        <!-- Content -->
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading Library...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Flavoursome Recipe Finder - Super Admin Panel. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="Jscript/admin_dashboard.js"></script>
+    <script>
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadLibraryRecipes();
+        });
+
+        async function loadLibraryRecipes() {
+            const container = document.getElementById('libraryContainer');
+            container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i><p>Loading Library...</p></div>';
+            try {
+                const resp = await fetch('Phpfile/get_recipes.php?action=get_recipes&status=approved');
+                const data = await resp.json();
+                if (data.success) {
+                    container.innerHTML = data.recipes.map(recipe => `
+                        <div class="recipe-card">
+                            <div class="recipe-card-header">
+                                <h3>${recipe.recipe_name}</h3>
+                                <span class="recipe-author">by ${recipe.username}</span>
+                            </div>
+                            <div class="recipe-card-body">
+                                <p><i class="fas fa-clock"></i> ${recipe.cooking_time}</p>
+                                <p><i class="fas fa-users"></i> ${recipe.serving_size}</p>
+                            </div>
+                        </div>
+                    `).join('') || '<p>No recipes found in library.</p>';
+                }
+            } catch (err) {
+                container.innerHTML = '<p>Error loading library.</p>';
+            }
+        }
+    </script>
+    <script src="Jscript/account_status_checker.js"></script>
+</body>
+</html>

@@ -1,0 +1,1293 @@
+/* ================================================
+   USER MANAGEMENT STYLES
+   ================================================ */
+
+/* Pagination Styles */
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-top: none;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    margin-top: -2px; /* Pull up to join table */
+}
+
+.pg-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.pg-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pg-btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pg-btn:hover:not(:disabled) {
+    background: var(--bg-secondary);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.pg-btn.pg-active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+}
+
+.pg-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--bg-secondary);
+}
+
+.pg-ellipsis {
+    color: var(--text-secondary);
+    padding: 0 4px;
+}
+
+/* User Statistics - reuse existing stat cards */
+
+/* User Filter Bar - Formal Design */
+.user-filter-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 0 0 200px;
+}
+
+.filter-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.formal-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.formal-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-group {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-group i {
+    position: absolute;
+    left: 14px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.search-group input {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.search-group input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Users List Container */
+.users-list {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+/* User Table Styles */
+.user-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 900px; /* Ensure table doesn't get too cramped */
+}
+
+.user-table th {
+    background: var(--bg-secondary);
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    border-bottom: 2px solid var(--border-light);
+    white-space: nowrap;
+}
+
+.user-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+    color: var(--text-primary);
+    transition: background 0.2s ease;
+}
+
+.user-table tr:last-child td {
+    border-bottom: none;
+}
+
+.user-table tr:hover td {
+    background: rgba(37, 99, 235, 0.02);
+}
+
+/* Table Specific Components */
+.user-info-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.user-table-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--text-white);
+    flex-shrink: 0;
+}
+
+.user-primary-info .user-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0px;
+}
+
+.user-primary-info .user-username {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.user-email-cell {
+    font-size: 0.8rem;
+}
+
+.user-date-cell {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Status & Role Badges in Table - Formal Rectangular Style */
+.user-role,
+.user-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+
+.role-user { background: #f0f7ff; color: #1e40af; border-color: #dbeafe; }
+.role-admin { background: #fffbeb; color: #92400e; border-color: #fef3c7; }
+.role-super-admin { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
+
+.status-active { background: #f0fdf4; color: #166534; border-color: #dcfce7; }
+.status-blocked { background: #fff1f2; color: #9f1239; border-color: #ffe4e6; }
+
+/* Table Actions */
+.user-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: flex-end;
+}
+
+/* Base reset — no gray defaults */
+.btn-table-action {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    border: none;
+    font-size: 0.8rem;
+    outline: none;
+}
+
+/* View — blue */
+.btn-table-action.btn-view,
+.btn-user-view {
+    background: rgba(37, 99, 235, 0.12);
+    color: #2563eb;
+}
+.btn-table-action.btn-view:hover,
+.btn-user-view:hover {
+    background: #2563eb;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* Role — purple */
+.btn-table-action.btn-role,
+.btn-user-role {
+    background: rgba(124, 58, 237, 0.12);
+    color: #7c3aed;
+}
+.btn-table-action.btn-role:hover,
+.btn-user-role:hover {
+    background: #7c3aed;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+}
+
+/* Block — orange */
+.btn-table-action.btn-block,
+.btn-user-block {
+    background: rgba(234, 88, 12, 0.12);
+    color: #ea580c;
+}
+.btn-table-action.btn-block:hover,
+.btn-user-block:hover {
+    background: #ea580c;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+}
+
+/* Unblock state — green */
+.btn-user-unblock {
+    background: rgba(22, 163, 74, 0.12) !important;
+    color: #16a34a !important;
+}
+.btn-user-unblock:hover {
+    background: #16a34a !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Delete — red */
+.btn-table-action.btn-delete,
+.btn-user-delete {
+    background: rgba(220, 38, 38, 0.12);
+    color: #dc2626;
+}
+.btn-table-action.btn-delete:hover,
+.btn-user-delete:hover {
+    background: #dc2626;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+
+/* Restricted (admin can't touch super admins) */
+.btn-table-action.btn-role.restricted {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    cursor: not-allowed;
+}
+.btn-table-action.btn-role.restricted:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+    transform: none;
+    box-shadow: none;
+}
+
+
+
+/* Change Role Modal Specific Details */
+#roleChangeModal .cu-modal {
+    max-width: 450px !important;
+}
+
+#roleChangeModal .cu-modal-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+#roleChangeModal .cu-select {
+    cursor: pointer;
+    background-color: #f9fafb;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+#roleChangeModal .cu-select:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+#roleChangeModal .cu-btn-admin {
+    background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
+}
+
+/* Keep existing modal and filter styles but ensure they look good with the table */
+
+
+/* User Detail Modal Content */
+.user-detail-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.info-item {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.info-item label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.info-item span {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Role Management */
+.role-selector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.role-selector label {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.role-select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.role-select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Activity List */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+    background: var(--bg-secondary);
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-content p {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Responsive Design for Users */
+@media (max-width: 1200px) {
+    /* Originally hid date columns, now relying on horizontal scroll */
+}
+
+@media (max-width: 768px) {
+    .user-table {
+        min-width: 500px;
+    }
+}
+
+/* Badges adjustments for mobile if needed */
+
+/* ==============================================
+   CREATE USER MODAL — admin_create_user.css
+   Link this in admin_dashboard.html:
+   <link rel="stylesheet" href="style/admin_create_user.css">
+   ============================================== */
+
+/* ---------- CSS Variables ---------- */
+:root {
+    --cu-primary: #1a1f36;
+    --cu-primary-light: #252d50;
+    --cu-accent-user: #2563eb;
+    --cu-accent-admin: #7c3aed;
+    --cu-accent-sa: #b45309;
+    --cu-accent-sa-end: #d97706;
+    --cu-success: #059669;
+    --cu-danger: #dc2626;
+    --cu-border: #e2e8f0;
+    --cu-border-focus: #94a3b8;
+    --cu-bg-input: #f8fafc;
+    --cu-text-primary: #0f172a;
+    --cu-text-secondary: #64748b;
+    --cu-text-muted: #94a3b8;
+    --cu-radius: 14px;
+    --cu-radius-sm: 8px;
+    --cu-shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.22), 0 8px 20px rgba(0, 0, 0, 0.12);
+    --cu-transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Overlay ---------- */
+.cu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: cuOverlayIn 0.25s ease forwards;
+}
+
+.cu-overlay.active {
+    display: flex;
+}
+
+@keyframes cuOverlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ---------- Modal Box ---------- */
+.cu-modal {
+    background: #ffffff;
+    border-radius: var(--cu-radius);
+    width: 100%;
+    max-width: 780px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--cu-shadow-lg);
+    animation: cuModalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.cu-modal::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cu-modal::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 99px;
+}
+
+@keyframes cuModalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ---------- Modal Header ---------- */
+.cu-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 32px 24px;
+    background: linear-gradient(135deg, var(--cu-primary) 0%, var(--cu-primary-light) 100%);
+    border-radius: var(--cu-radius) var(--cu-radius) 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.cu-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cu-header-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.cu-modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.3px;
+    font-family: 'Georgia', serif;
+}
+
+.cu-modal-subtitle {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 3px 0 0;
+}
+
+.cu-close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--cu-transition);
+    flex-shrink: 0;
+}
+
+.cu-close-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ---------- Role Selector ---------- */
+.cu-role-selector {
+    padding: 28px 32px 20px;
+}
+
+.cu-role-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cu-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 0 0 14px;
+}
+
+.cu-role-pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cu-role-pill {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 2px solid var(--cu-border);
+    border-radius: 12px;
+    background: var(--cu-bg-input);
+    cursor: pointer;
+    transition: var(--cu-transition);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.cu-role-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: transparent;
+    transition: var(--cu-transition);
+}
+
+.cu-role-pill:hover {
+    border-color: var(--cu-border-focus);
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Active states per role */
+.cu-role-pill.active[data-role="user"] {
+    border-color: var(--cu-accent-user);
+    background: #eff6ff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.cu-role-pill.active[data-role="user"]::before {
+    background: var(--cu-accent-user);
+}
+
+.cu-role-pill.active[data-role="admin"] {
+    border-color: var(--cu-accent-admin);
+    background: #f5f3ff;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.cu-role-pill.active[data-role="admin"]::before {
+    background: var(--cu-accent-admin);
+}
+
+.cu-role-pill.active[data-role="super admin"] {
+    border-color: var(--cu-accent-sa);
+    background: #fffbeb;
+    box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+}
+
+.cu-role-pill.active[data-role="super admin"]::before {
+    background: var(--cu-accent-sa);
+}
+
+.cu-pill-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: var(--cu-transition);
+}
+
+[data-role="user"] .cu-pill-icon {
+    background: #dbeafe;
+    color: var(--cu-accent-user);
+}
+
+[data-role="admin"] .cu-pill-icon {
+    background: #ede9fe;
+    color: var(--cu-accent-admin);
+}
+
+[data-role="super admin"] .cu-pill-icon {
+    background: #fef3c7;
+    color: var(--cu-accent-sa);
+}
+
+.cu-pill-text {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cu-text-primary);
+    line-height: 1.2;
+}
+
+.cu-pill-desc {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--cu-text-secondary);
+    margin-top: 1px;
+}
+
+/* ---------- Divider ---------- */
+.cu-divider {
+    margin: 0 32px;
+    position: relative;
+    text-align: center;
+}
+
+.cu-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--cu-border);
+}
+
+.cu-divider-text {
+    position: relative;
+    background: #fff;
+    padding: 0 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cu-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ---------- Forms ---------- */
+.cu-form {
+    padding: 24px 32px 32px;
+    animation: cuFormIn 0.3s ease forwards;
+}
+
+@keyframes cuFormIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cu-section-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    color: var(--cu-text-muted);
+    margin: 24px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cu-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cu-border);
+}
+
+.cu-form-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.cu-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cu-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 640px) {
+
+    .cu-grid-2,
+    .cu-grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Fields ---------- */
+.cu-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cu-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--cu-text-primary);
+    letter-spacing: 0.1px;
+}
+
+.cu-req {
+    color: var(--cu-danger);
+    margin-left: 2px;
+}
+
+.cu-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cu-input-icon {
+    position: absolute;
+    left: 13px;
+    color: var(--cu-text-muted);
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cu-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px 0 36px;
+    border: 1.5px solid var(--cu-border);
+    border-radius: var(--cu-radius-sm);
+    background: var(--cu-bg-input);
+    font-size: 0.88rem;
+    color: var(--cu-text-primary);
+    transition: var(--cu-transition);
+    outline: none;
+    font-family: inherit;
+}
+
+.cu-input:focus {
+    border-color: #6366f1;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.cu-input::placeholder {
+    color: var(--cu-text-muted);
+}
+
+.cu-select {
+    cursor: pointer;
+    appearance: none;
+    padding-right: 32px;
+}
+
+.cu-select-wrap::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 12px;
+    color: var(--cu-text-muted);
+    font-size: 0.7rem;
+    pointer-events: none;
+}
+
+/* Password toggle */
+.cu-password-wrap .cu-input {
+    padding-right: 42px;
+}
+
+.cu-toggle-pw {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--cu-text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 4px;
+    transition: var(--cu-transition);
+    z-index: 1;
+}
+
+.cu-toggle-pw:hover {
+    color: var(--cu-text-primary);
+}
+
+/* ---------- Form Actions ---------- */
+.cu-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cu-border);
+}
+
+.cu-btn-cancel {
+    padding: 10px 22px;
+    border: 1.5px solid var(--cu-border);
+    border-radius: var(--cu-radius-sm);
+    background: #fff;
+    color: var(--cu-text-secondary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--cu-transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.cu-btn-cancel:hover {
+    border-color: var(--cu-danger);
+    color: var(--cu-danger);
+    background: #fff5f5;
+}
+
+.cu-btn-submit {
+    padding: 10px 26px;
+    border: none;
+    border-radius: var(--cu-radius-sm);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--cu-transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-family: inherit;
+    letter-spacing: 0.1px;
+}
+
+.cu-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.cu-btn-submit:active {
+    transform: translateY(0);
+}
+
+.cu-btn-user {
+    background: linear-gradient(135deg, var(--cu-accent-user) 0%, #3b82f6 100%);
+}
+
+.cu-btn-admin {
+    background: linear-gradient(135deg, var(--cu-accent-admin) 0%, #8b5cf6 100%);
+}
+
+.cu-btn-superadmin {
+    background: linear-gradient(135deg, var(--cu-accent-sa) 0%, var(--cu-accent-sa-end) 100%);
+}
+
+/* ---------- Success Message ---------- */
+.cu-success-msg {
+    padding: 48px 32px;
+    text-align: center;
+    animation: cuFormIn 0.4s ease forwards;
+}
+
+.cu-success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: var(--cu-success);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.08);
+}
+
+.cu-success-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cu-text-primary);
+    margin: 0 0 8px;
+    font-family: 'Georgia', serif;
+}
+
+.cu-success-text {
+    font-size: 0.9rem;
+    color: var(--cu-text-secondary);
+    margin: 0;
+}
+
+/* ---------- Trigger Button (in Users section header) ---------- */
+.cu-trigger-btn {
+    padding: 9px 20px;
+    background: linear-gradient(135deg, #1a1f36 0%, #252d50 100%);
+    color: #fff;
+    border: none;
+    border-radius: var(--cu-radius-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--cu-transition);
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(26, 31, 54, 0.25);
+}
+
+.cu-trigger-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 31, 54, 0.35);
+}
+
+/* ---------- Error state ---------- */
+.cu-input.cu-error {
+    border-color: var(--cu-danger);
+    background: #fff5f5;
+}
+
+.cu-field-error {
+    font-size: 0.75rem;
+    color: var(--cu-danger);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ---------- Loading state on submit button ---------- */
+.cu-btn-submit.cu-loading {
+    opacity: 0.7;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.cu-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: cuSpin 0.7s linear infinite;
+}
+
+@keyframes cuSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Modals Role Selector & Privileges Preview */
+.cu-role-selector {
+    padding: 20px 32px 10px;
+}
+
+.cu-privileges-preview {
+    padding: 0 32px 20px;
+}
+
+.cu-role-pills {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.cu-role-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.cu-role-pill:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.cu-role-pill.active {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cu-role-pill.active[data-role="user"] { border-color: #2563eb; background: #eff6ff; }
+.cu-role-pill.active[data-role="admin"] { border-color: #7c3aed; background: #f5f3ff; }
+.cu-role-pill.active[data-role="super admin"] { border-color: #b45309; background: #fffbeb; }
+
+.cu-pill-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-role="user"] .cu-pill-icon { color: #2563eb; }
+[data-role="admin"] .cu-pill-icon { color: #7c3aed; }
+[data-role="super admin"] .cu-pill-icon { color: #b45309; }
+
+.cu-pill-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.cu-pill-text {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #1e293b;
+}
+
+.cu-pill-desc {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* Privileges Column Styles */
+.privileges-cell {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.privilege-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 0;
+}
+
+.privilege-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.privilege-tag i {
+    font-size: 0.65rem;
+    opacity: 0.9;
+}
+
+.privilege-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: default;
+}
+
+/* Role-specific Highlights (Visual and Descriptive) */
+.p-tag-activity-logs, .p-tag-logs { color: #475569; background: #f1f5f9; border-color: #cbd5e1; }
+.p-tag-recipe-management, .p-tag-view-recipes, .p-tag-request-recipes { color: #0891b2; background: #ecfeff; border-color: #a5f3fc; }
+.p-tag-user-directory, .p-tag-search { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+.p-tag-update-requests, .p-tag-request-approval, .p-tag-accept, .p-tag-reject { color: #7c3aed; background: #f5f3ff; border-color: #ddd6fe; }
+.p-tag-direct-user-control, .p-tag-add-user, .p-tag-create-user { color: #059669; background: #ecfdf5; border-color: #a7f3d0; }
+.p-tag-account-deletion, .p-tag-delete { color: #dc2626; background: #fef2f2; border-color: #fecaca; }
+.p-tag-full-management, .p-tag-edit { color: #9333ea; background: #faf5ff; border-color: #e9d5ff; }
+
+@media (max-width: 1400px) {
+    /* Originally hid privileges on smaller desktops, now relying on horizontal scroll */
+}

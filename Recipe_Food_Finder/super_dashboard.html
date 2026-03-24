@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/admin_dashboard.css">
+    <link rel="stylesheet" href="style/admin_users.css">
+    <link rel="stylesheet" href="style/admin_logs.css">
+    <link rel="stylesheet" href="style/admin_settings.css">
+    <link rel="stylesheet" href="style/admin_requests.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
+    <title>Flavoursome - Super Admin Dashboard</title>
+</head>
+
+<body>
+    <!-- Hidden User Session Data -->
+    <div id="userSessionData" style="display: none;">
+        <span id="userEmail"></span>
+        <span id="userFullName"></span>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <span class="sidebar-logo-name">Flavoursome</span>
+                <span class="sidebar-logo-tagline">Super Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <nav class="sidebar-menu">
+            <!-- Main Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Main</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_dashboard.html#dashboard" class="sidebar-menu-link active" data-section="dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_requests.html#requests" class="sidebar-menu-link" data-section="requests">
+                            <i class="fas fa-bell"></i>
+                            <span>Administrative Requests</span>
+                            <span id="requestCountBadge" class="badge-counter" style="display:none; background: #EF4444; color: white; border-radius: 10px; padding: 2px 6px; font-size: 0.7em; margin-left: auto;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Management Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Management</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_users.html#users" class="sidebar-menu-link" data-section="users">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipe_requests.html#recipes" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-tasks"></i>
+                            <span>Recipe Requests</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipes.html#recipesModule" class="sidebar-menu-link" data-section="recipesModule">
+                            <i class="fas fa-utensils"></i>
+                            <span>Recipes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_logs.html#logs" class="sidebar-menu-link" data-section="logs">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Activity Logs</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_settings.html#settings" class="sidebar-menu-link" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>System Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name" id="sidebarUsername">Super Admin</div>
+                    <div class="sidebar-user-role">Super Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-title">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="pageTitle">Super Admin Dashboard</h1>
+                        <div class="nav-breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span id="breadcrumbCurrent">Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">0</span>
+                    </div>
+                    <button class="profile-btn">
+                        <i class="fas fa-user-shield"></i>
+                        <span id="navUsername">Super Admin</span>
+                    </button>
+
+                    <button class="logout-btn-red" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboardSection">
+            <section class="dashboard-header">
+                <div class="container">
+                    <div class="welcome-section">
+                        <div class="welcome-text">
+                            <h1>Super Admin Dashboard</h1>
+                            <p>Complete system control and management</p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card total-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalUsersCount">0</h3>
+                                <p>Total Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card approved-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="adminUsersCount">0</h3>
+                                <p>Administrators</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card pending-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingRecipesCount">0</h3>
+                                <p>Pending Recipes</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card rejected-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalLogsCount">0</h3>
+                                <p>Activity Logs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="section-header" style="margin-top: 2rem;">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                        <a href="super_users.html" class="stat-card"
+                            style="cursor: pointer; border: 2px solid #4CAF50; transition: all 0.3s; text-decoration: none; color: inherit;">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4CAF50, #45a049);">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p style="font-size: 1rem; font-weight: 600;">Create New User</p>
+                            </div>
+                        </a>
+
+                        <a href="super_recipe_requests.html" class="stat-card"
+                            style="cursor: pointer; border: 2px solid #2196F3; transition: all 0.3s; text-decoration: none; color: inherit;">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #2196F3, #1976D2);">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p style="font-size: 1rem; font-weight: 600;">Review Recipes</p>
+                            </div>
+                        </a>
+
+                        <a href="super_logs.html" class="stat-card"
+                            style="cursor: pointer; border: 2px solid #FF9800; transition: all 0.3s; text-decoration: none; color: inherit;">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #FF9800, #F57C00);">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p style="font-size: 1rem; font-weight: 600;">View Activity Logs</p>
+                            </div>
+                        </a>
+
+                        <a href="super_settings.html" class="stat-card"
+                            style="cursor: pointer; border: 2px solid #9C27B0; transition: all 0.3s; text-decoration: none; color: inherit;">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #9C27B0, #7B1FA2);">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="stat-info">
+                                <p style="font-size: 1rem; font-weight: 600;">System Settings</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Flavoursome Recipe Finder - Super Admin Panel. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals (Simplified for Dashboard) -->
+    <script src="Jscript/admin_dashboard.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        // Initialize dashboard on load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadDashboardStats();
+        });
+
+        function loadDashboardStats() {
+            fetch('Phpfile/admin_users.php?action=get_users')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('totalUsersCount').textContent = data.stats.total || 0;
+                        document.getElementById('adminUsersCount').textContent = (data.stats.admins || 0) + (data.stats.super_admins || 0);
+                    }
+                })
+                .catch(error => console.error('Error loading user stats:', error));
+
+            fetch('Phpfile/get_recipes.php?action=get_recipes')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const pending = data.recipes.filter(r => r.status === 'pending').length;
+                        document.getElementById('pendingRecipesCount').textContent = pending;
+                    }
+                })
+                .catch(error => console.error('Error loading recipe stats:', error));
+
+            fetch('Phpfile/get_logs.php?action=get_all')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('totalLogsCount').textContent = data.stats.total || 0;
+                    }
+                })
+                .catch(error => console.error('Error loading log stats:', error));
+        }
+    </script>
+    <script src="Jscript/account_status_checker.js"></script>
+</body>
+
+</html>

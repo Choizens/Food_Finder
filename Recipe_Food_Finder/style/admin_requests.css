@@ -1,0 +1,137 @@
+/* admin_requests.css */
+
+.requests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.request-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.request-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.req-header {
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.req-create .req-header {
+    background: var(--success-bg);
+    color: var(--success-dark);
+}
+
+.req-update .req-header {
+    background: var(--info-bg);
+    color: var(--info-dark);
+}
+
+.req-delete .req-header {
+    background: var(--danger-bg);
+    color: var(--danger-dark);
+}
+
+.req-body {
+    padding: 1rem;
+}
+
+.req-body p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.req-details {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--border-medium);
+}
+
+.req-actions {
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border-light);
+}
+
+.req-actions button {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+}
+
+.btn-approve {
+    background: var(--success);
+    color: white;
+}
+
+.btn-approve:hover {
+    background: #059669;
+}
+
+.btn-reject {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-medium) !important;
+}
+
+.btn-reject:hover,
+.btn-reject:focus {
+    background: #FEE2E2;
+    /* var(--danger-bg) */
+    color: #EF4444;
+    /* var(--danger) */
+    outline: none;
+}
+
+.btn-delete-request {
+    background: #6B7280;
+    color: white !important;
+}
+
+.btn-delete-request:hover,
+.btn-delete-request:focus {
+    background: #B91C1C;
+    /* var(--danger-dark) */
+    color: white !important;
+    outline: none;
+}
+
+.badge-counter {
+    background: var(--danger);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+    display: none;
+    /* Hidden by default */
+}

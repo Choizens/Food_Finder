@@ -12,6 +12,15 @@ let failedAttempts = 0; // Initialize failedAttempts variable
 document.addEventListener('DOMContentLoaded', () => {
     const messElement = document.getElementById('mess');
     const forgotPasswordMsgElement = document.getElementById('forgot-password-msg');
+
+    // Check for blocked redirect
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('blocked')) {
+        messElement.textContent = 'Your account has been blocked by the super admin';
+        messElement.style.display = 'block';
+        messElement.style.color = 'red';
+    }
+
     const savedLockoutEndTime = localStorage.getItem('lockoutEndTime');
     const savedFailedAttempts = localStorage.getItem('failedAttempts');
     const savedMessage = localStorage.getItem('errorMessage');
@@ -44,7 +53,40 @@ document.addEventListener('DOMContentLoaded', () => {
             clearLockoutState();
         }
     }
+
+    // Add event listener to forgot password link to clear state
+    const forgotPasswordLinks = document.querySelectorAll('a[href="Forgot_password.html"]');
+    forgotPasswordLinks.forEach(link => {
+        link.addEventListener('click', handleForgotPasswordClick);
+    });
 });
+
+function handleForgotPasswordClick(event) {
+    // Clear all lockout and error states when navigating to forgot password
+    clearLockoutState();
+
+    // Clear the countdown timer if active
+    if (countdownTimer) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+    }
+
+    // Clear UI elements
+    document.getElementById('mess').style.display = "none";
+    document.getElementById('mess').textContent = "";
+    document.getElementById('forgot-password-msg').style.display = "none";
+    document.getElementById('countdown-display').textContent = '';
+
+    // Re-enable login UI
+    disableLoginUI(false);
+
+    // Clear input fields
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+
+    // Reset failed attempts counter
+    failedAttempts = 0;
+}
 
 function handleLogin(event) {
     event.preventDefault();

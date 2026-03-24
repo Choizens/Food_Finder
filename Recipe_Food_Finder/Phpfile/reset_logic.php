@@ -9,6 +9,7 @@ header('Content-Type: application/json');
 
 // Use your actual database name 'register'
 $conn = new mysqli("localhost", "root", "", "register");
+$conn->set_charset("utf8mb4");
 
 if ($conn->connect_error) {
     echo json_encode(['success' => false, 'message' => 'Database connection failed']);
@@ -24,17 +25,61 @@ if (!$data || !isset($data['action'])) {
 $action = $data['action'];
 
 
-// --- STEP 1: SEND OTP (Unique Recipe_Food_Finder Design) ---
-if ($action == 'send_otp') {
-    $email = $conn->real_escape_string($data['email']);
-    $check = $conn->query("SELECT fname FROM user_reg WHERE emailadd = '$email'"); 
+// --- STEP 0: CHECK EMAIL & GET USERNAME ---
+if ($action == 'check_email') {
+    $email = $data['email'];
+    
+    $stmt = $conn->prepare("SELECT username, idnum FROM user_reg WHERE emailadd = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($check->num_rows > 0) {
-        $user = $check->fetch_assoc();
-        $otp = rand(100000, 999999);
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        echo json_encode(['success' => true, 'username' => $user['username'], 'idnum' => $user['idnum']]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Email not found.']);
+    }
+    $stmt->close();
+    exit;
+}
+
+
+// --- STEP 1: SEND OTP (Unique Recipe_Food_Finder Design with Hashed OTP) ---
+if ($action == 'send_otp') {
+    $email = $data['email'];
+    
+    $stmt = $conn->prepare("SELECT fname, username, idnum FROM user_reg WHERE emailadd = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $stmt->close();
         
-        $conn->query("DELETE FROM authentication_code WHERE email = '$email'");
-        $conn->query("INSERT INTO authentication_code (email, otp_code, created_at) VALUES ('$email', '$otp', NOW())");
+        // Generate plain OTP for email
+        $otp = str_pad(strval(rand(0, 999999)), 6, '0', STR_PAD_LEFT);
+        
+        // Hash the OTP before storing in database
+        $hashedOtp = password_hash($otp, PASSWORD_DEFAULT);
+        
+        // Delete old OTP entries for this email
+        $deleteStmt = $conn->prepare("DELETE FROM authentication_code WHERE email = ?");
+        $deleteStmt->bind_param("s", $email);
+        $deleteStmt->execute();
+        $deleteStmt->close();
+        
+        // Store hashed OTP in database
+        $insertStmt = $conn->prepare("INSERT INTO authentication_code (email, otp_code, created_at) VALUES (?, ?, NOW())");
+        $insertStmt->bind_param("ss", $email, $hashedOtp);
+        
+        if (!$insertStmt->execute()) {
+            echo json_encode(['success' => false, 'message' => 'Failed to store OTP: ' . $conn->error]);
+            $insertStmt->close();
+            exit;
+        }
+        $insertStmt->close();
 
         $mail = new PHPMailer(true);
         try {
@@ -52,7 +97,7 @@ if ($action == 'send_otp') {
             $mail->isHTML(true);
             $mail->Subject = 'Verify Your Identity - Recipe_Food_Finder';
 
-            // Formal & Unique HTML Template
+            // Formal & Unique HTML Template (Send plain OTP to user)
             $mail->Body = "
             <div style='background-color: #1a1a1a; padding: 50px 20px; font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;'>
                 <table align='center' border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 550px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);'>
@@ -87,86 +132,126 @@ if ($action == 'send_otp') {
             </div>";
 
             $mail->send();
-            echo json_encode(['success' => true]);
+            echo json_encode(['success' => true, 'username' => $user['username'], 'idnum' => $user['idnum']]);
         } catch (Exception $e) {
             echo json_encode(['success' => false, 'message' => 'Mailer Error: ' . $mail->ErrorInfo]);
         }
     } else {
+        $stmt->close();
         echo json_encode(['success' => false, 'message' => 'Email not found.']);
     }
 }
 
-// --- STEP 2: VERIFY OTP (With 2-Minute Limit) ---
+// --- STEP 2: VERIFY OTP (With Hashed Comparison & 2-Minute Limit) ---
 if ($action == 'verify_otp') {
-    $email = $conn->real_escape_string($data['email']);
-    $otp = $conn->real_escape_string($data['otp']);
-
-    // Verify OTP and 2-minute limit
-    $res = $conn->query("SELECT * FROM authentication_code WHERE email = '$email' AND otp_code = '$otp' AND created_at >= NOW() - INTERVAL 120 SECOND ORDER BY id DESC LIMIT 1");
+    $email = $data['email'];
+    $inputOtp = trim(strval($data['otp']));
     
-    if ($res->num_rows > 0) {
-        // Fetch q1, q2, and q3 IDs for this account
-        $userRes = $conn->query("SELECT q1_id, q2_id, q3_id FROM user_reg WHERE emailadd = '$email'");
-        $userData = $userRes->fetch_assoc();
-
-        // Join with security_questions to get the text for all three
-        $questions = [];
-        $ids = [$userData['q1_id'], $userData['q2_id'], $userData['q3_id']];
-        
-        foreach($ids as $index => $id) {
-            if($id) {
-                $qTextRes = $conn->query("SELECT question_text FROM security_questions WHERE id = '$id'");
-                if($row = $qTextRes->fetch_assoc()) {
-                    $questions[] = [
-                        'id' => $id,
-                        'text' => $row['question_text'],
-                        'type' => 'a' . ($index + 1) // Store as a1, a2, or a3 for verification
-                    ];
-                }
-            }
-        }
-
-        echo json_encode(['success' => true, 'questions' => $questions]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid or expired OTP.']);
-    }
-}
-
-// Fix the Verify Answer section to check against column 'a1'
-if ($action == 'verify_answer') {
-    $email = $conn->real_escape_string($data['email']);
-    $answer = $conn->real_escape_string($data['answer']);
-    $column = $conn->real_escape_string($data['column']); // Gets 'a1', 'a2', or 'a3'
-
-    // Validate that the column name is safe to prevent SQL injection
-    $allowed_columns = ['a1', 'a2', 'a3'];
-    if (!in_array($column, $allowed_columns)) {
-        echo json_encode(['success' => false, 'message' => 'Invalid question selection.']);
+    // Remove any spaces or special characters
+    $inputOtp = preg_replace('/[^0-9]/', '', $inputOtp);
+    
+    // Fetch the hashed OTP for this email within the 2-minute window
+    $stmt = $conn->prepare("SELECT otp_code, created_at FROM authentication_code WHERE email = ? AND created_at >= DATE_SUB(NOW(), INTERVAL 120 SECOND) ORDER BY created_at DESC LIMIT 1");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows === 0) {
+        $stmt->close();
+        echo json_encode(['success' => false, 'message' => 'OTP expired or not found.']);
         exit;
     }
-
-    // Check the specific answer column for this account
-    $res = $conn->query("SELECT * FROM user_reg WHERE emailadd = '$email' AND $column = '$answer'");
     
-    if ($res && $res->num_rows > 0) {
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Incorrect answer for that specific question.']);
+    $row = $result->fetch_assoc();
+    $hashedOtpFromDB = $row['otp_code'];
+    $stmt->close();
+    
+    // Verify the input OTP against the stored hash
+    if (!password_verify($inputOtp, $hashedOtpFromDB)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid OTP.']);
+        exit;
     }
+    
+    // OTP is valid, fetch security questions
+    $userStmt = $conn->prepare("SELECT q1_id, q2_id, q3_id FROM user_reg WHERE emailadd = ?");
+    $userStmt->bind_param("s", $email);
+    $userStmt->execute();
+    $userResult = $userStmt->get_result();
+    
+    if ($userResult->num_rows === 0) {
+        $userStmt->close();
+        echo json_encode(['success' => false, 'message' => 'User not found.']);
+        exit;
+    }
+    
+    $userData = $userResult->fetch_assoc();
+    $userStmt->close();
+
+    // Get security questions
+    $questions = [];
+    $ids = [$userData['q1_id'], $userData['q2_id'], $userData['q3_id']];
+    
+    foreach($ids as $index => $id) {
+        if($id) {
+            $qStmt = $conn->prepare("SELECT question_text FROM security_questions WHERE id = ?");
+            $qStmt->bind_param("i", $id);
+            $qStmt->execute();
+            $qResult = $qStmt->get_result();
+            if($qRow = $qResult->fetch_assoc()) {
+                $questions[] = [
+                    'id' => $id,
+                    'text' => $qRow['question_text'],
+                    'type' => 'a' . ($index + 1)
+                ];
+            }
+            $qStmt->close();
+        }
+    }
+
+    echo json_encode(['success' => true, 'questions' => $questions]);
 }
 
-// --- STEP 4: UPDATE PASSWORD ---
+// Verify Answer
+if ($action == 'verify_answer') {
+    $email = $data['email'];
+    $ans1 = $data['ans1'];
+    $ans2 = $data['ans2'];
+    $ans3 = $data['ans3'];
+
+    // Check all three answers
+    $stmt = $conn->prepare("SELECT * FROM user_reg WHERE emailadd = ? AND a1 = ? AND a2 = ? AND a3 = ?");
+    $stmt->bind_param("ssss", $email, $ans1, $ans2, $ans3);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'One or more answers are incorrect. Please try again.']);
+    }
+    $stmt->close();
+}
+
+// Update Password
 if ($action == 'update_password') {
-    $email = $conn->real_escape_string($data['email']);
-    // Note: If you use password_hash, remember to use password_verify during login!
+    $email = $data['email'];
     $newPass = password_hash($data['password'], PASSWORD_DEFAULT);
     
-    if ($conn->query("UPDATE user_reg SET password = '$newPass' WHERE emailadd = '$email'")) {
-        // Clean up: delete the OTP after successful reset
-        $conn->query("DELETE FROM authentication_code WHERE email = '$email'");
+    $stmt = $conn->prepare("UPDATE user_reg SET password = ? WHERE emailadd = ?");
+    $stmt->bind_param("ss", $newPass, $email);
+    
+    if ($stmt->execute()) {
+        $deleteStmt = $conn->prepare("DELETE FROM authentication_code WHERE email = ?");
+        $deleteStmt->bind_param("s", $email);
+        $deleteStmt->execute();
+        $deleteStmt->close();
+        
         echo json_encode(['success' => true]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to update password.']);
     }
+    $stmt->close();
 }
+
+$conn->close();
 ?>

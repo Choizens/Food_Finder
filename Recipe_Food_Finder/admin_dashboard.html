@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/admin_dashboard.css">
+    <link rel="stylesheet" href="style/admin_users.css">
+    <link rel="stylesheet" href="style/admin_create_user.css">
+    <link rel="stylesheet" href="style/admin_logs.css">
+    <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
+    <title>Flavoursome - Admin Dashboard</title>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <span class="sidebar-logo-name">Flavoursome</span>
+                <span class="sidebar-logo-tagline">Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <nav class="sidebar-menu">
+            <div class="sidebar-menu-section" style="display: none;">
+                <h4 class="sidebar-menu-title">Main</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="#dashboard" class="sidebar-menu-link active" data-section="recipes">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#pending" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-clock"></i>
+                            <span>Pending</span>
+                            <span class="sidebar-menu-badge" id="sidebarPendingCount">0</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#approved" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Approved</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#rejected" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Rejected</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Management</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="#users" class="sidebar-menu-link" data-section="users">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="user_request.html" class="sidebar-menu-link" id="sidebarRequestsLink">
+                            <i class="fas fa-user-clock"></i>
+                            <span>Pending Requests</span>
+                            <span class="sidebar-menu-badge" id="pendingRequestsBadge" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <!-- CHANGED: analytics → logs -->
+                    <li class="sidebar-menu-item">
+                        <a href="#logs" class="sidebar-menu-link" data-section="logs">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Logs</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#settings" class="sidebar-menu-link" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">Admin</div>
+                    <div class="sidebar-user-role">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-title">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="pageTitle">Admin Dashboard</h1>
+                        <div class="nav-breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span id="breadcrumbCurrent">Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">0</span>
+                    </div>
+                    <button class="profile-btn">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Admin</span>
+                    </button>
+
+                    <!-- ADDED: Logout button -->
+                    <button class="logout-btn-red" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- RECIPES SECTION -->
+        <div id="recipesSection">
+            <!-- Dashboard Header -->
+            <section class="dashboard-header" id="dashboard">
+                <div class="container">
+                    <div class="welcome-section">
+                        <div class="welcome-text">
+                            <h1>Admin Dashboard</h1>
+                            <p>Manage recipe submissions and approvals</p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card pending-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingCount">0</h3>
+                                <p>Pending Reviews</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card approved-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="approvedCount">0</h3>
+                                <p>Approved Recipes</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card rejected-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="rejectedCount">0</h3>
+                                <p>Rejected Recipes</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card total-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalCount">0</h3>
+                                <p>Total Submissions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Tabs -->
+            <section class="filter-section">
+                <div class="container">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-status="all">
+                            <i class="fas fa-list"></i> All Recipes
+                        </button>
+                        <button class="filter-tab" data-status="pending">
+                            <i class="fas fa-clock"></i> Pending
+                        </button>
+                        <button class="filter-tab" data-status="approved">
+                            <i class="fas fa-check-circle"></i> Approved
+                        </button>
+                        <button class="filter-tab" data-status="rejected">
+                            <i class="fas fa-times-circle"></i> Rejected
+                        </button>
+                    </div>
+
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput"
+                            placeholder="Search recipes by name, category, or submitter...">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recipes List -->
+            <section class="recipes-management" id="pending">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Recipe Submissions</h2>
+                        <button class="refresh-btn" onclick="loadRecipes()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+
+                    <div id="recipesContainer" class="recipes-list">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading recipes...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- USERS SECTION -->
+        <div id="usersSection" style="display: none;">
+            <section class="users-management">
+                <div class="container">
+                    <div class="welcome-section" style="padding: 2rem 0;">
+                        <div class="welcome-text">
+                            <h1>User Management</h1>
+                            <p>Manage user accounts and permissions</p>
+                        </div>
+                    </div>
+
+                    <!-- User Statistics -->
+                    <div class="stats-grid">
+                        <div class="stat-card total-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalUsersCount">0</h3>
+                                <p>Total Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card approved-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="regularUsersCount">0</h3>
+                                <p>Regular Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card pending-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="adminUsersCount">0</h3>
+                                <p>Admin Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card rejected-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-slash"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="blockedUsersCount">0</h3>
+                                <p>Blocked Users</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Filters -->
+                    <!-- User Filter Bar (Formal Design) -->
+                    <div class="user-filter-bar">
+                        <div class="filter-group">
+                            <label><i class="fas fa-user-shield"></i> Role</label>
+                            <select id="roleFilterSelect" class="formal-select">
+                                <option value="all">All Roles</option>
+                                <option value="user">Regular User</option>
+                                <option value="admin">Administrator</option>
+                                <option value="super admin">Super Admin</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label><i class="fas fa-toggle-on"></i> Status</label>
+                            <select id="statusFilterSelect" class="formal-select">
+                                <option value="all">All Status</option>
+                                <option value="active">Active Accounts</option>
+                                <option value="blocked">Blocked Accounts</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="userSearchInput" placeholder="Search users by name, username, or email...">
+                        </div>
+                    </div>
+
+                    <!-- Users List -->
+                    <div class="section-header" style="margin-top: 2rem;">
+                        <h2>User Management</h2>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <button class="refresh-btn" onclick="loadUsers()">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <button class="cu-trigger-btn" onclick="openCreateUserModal()">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div id="usersContainer" class="users-list">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading User Management...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LOGS SECTION (replaces Analytics) -->
+        <div id="logsSection" style="display: none;">
+            <div class="container" style="padding:2rem;">
+
+                <!-- Page Header -->
+                <div class="welcome-section" style="padding:1rem 0 1.5rem;">
+                    <div class="welcome-text">
+                        <h1>Activity Logs</h1>
+                        <p>Track all login events, admin actions, and system activity</p>
+                    </div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="logs-stats-grid">
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon all"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatTotal">0</h4>
+                            <p>Total Events</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon login"><i class="fas fa-sign-in-alt"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatLogins">0</h4>
+                            <p>Logins</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon status"><i class="fas fa-toggle-on"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatStatus">0</h4>
+                            <p>Status Changes</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon delete"><i class="fas fa-user-times"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatDeletes">0</h4>
+                            <p>Deletions</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon create"><i class="fas fa-user-plus"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatCreates">0</h4>
+                            <p>Accounts Created</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon role"><i class="fas fa-user-tag"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatRoles">0</h4>
+                            <p>Role Changes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls: filter pills + search + refresh -->
+                <div class="logs-controls">
+                    <div class="logs-filter-pills">
+                        <button class="log-filter-pill active" data-type="all"><i class="fas fa-list"></i> All</button>
+                        <button class="log-filter-pill pill-login" data-type="login"><i class="fas fa-sign-in-alt"></i>
+                            Logins</button>
+                        <button class="log-filter-pill pill-status" data-type="status_update"><i
+                                class="fas fa-toggle-on"></i> Status</button>
+                        <button class="log-filter-pill pill-delete" data-type="user_delete"><i
+                                class="fas fa-user-times"></i> Deleted</button>
+                        <button class="log-filter-pill pill-create" data-type="create_user"><i
+                                class="fas fa-user-plus"></i> Created</button>
+                        <button class="log-filter-pill pill-role" data-type="role_update"><i
+                                class="fas fa-user-tag"></i> Role</button>
+                    </div>
+                    <div class="logs-search-wrap">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="logsSearchInput" class="logs-search-input" placeholder="Search logs…">
+                    </div>
+                    <button class="logs-refresh-btn" onclick="fetchAndDisplayLogs()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Table -->
+                <div class="logs-table-container" id="logsTableContainer">
+                    <div class="logs-table-header">
+                        <h3><i class="fas fa-history"></i> Event History</h3>
+                        <span class="logs-count-badge" id="logsCountBadge">— entries</span>
+                    </div>
+                    <div class="logs-table-scroll">
+                        <table class="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Action Login</th>
+                                    <th>Login Time</th>
+                                    <th>Action Logout</th>
+                                    <th>Logout Time</th>
+                                    <th>Target</th>
+                                    <th>Device</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTableBody">
+                                <tr>
+                                    <td colspan="8" class="logs-loading">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading logs…
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="logs-pagination">
+                        <span class="logs-pagination-info" id="logsPaginationInfo">Loading…</span>
+                        <div class="logs-pagination-btns" id="logsPaginationBtns"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div id="settingsSection" style="display: none;">
+            <div class="container" style="padding: 2rem;">
+                <div class="settings-grid">
+                    <!-- Profile Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <i class="fas fa-user-cog"></i>
+                            <h3>Profile Settings</h3>
+                        </div>
+                        <form id="adminProfileForm" class="settings-form">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="adminUsername" placeholder="Username" readonly>
+                                <small>Username cannot be changed by admins.</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="adminEmail" placeholder="Email Address">
+                            </div>
+
+                            <!-- New Privileges Display -->
+                            <div class="form-group">
+                                <label>Account Privileges</label>
+                                <div id="adminPrivilegesList" class="privileges-list">
+                                    <div class="privilege-item loading">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading privileges...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Security</h3>
+                        </div>
+                        <form id="adminSecurityForm" class="settings-form">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="currentPassword" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="newPassword" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Change Password</button>
+                        </form>
+                    </div>
+
+                    <!-- System Preferences -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <i class="fas fa-sliders-h"></i>
+                            <h3>Preferences</h3>
+                        </div>
+                        <div class="settings-options">
+                            <div class="option-item">
+                                <div class="option-info">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive alerts for new recipe submissions</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="emailNotifToggle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <div class="option-info">
+                                    <h4>Dark Mode</h4>
+                                    <p>Toggle dashboard theme</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="darkModeToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Flavoursome Recipe Finder - Admin Panel. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Recipe Detail Modal -->
+    <div id="recipeDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalRecipeName">Recipe Details</h2>
+                <span class="close-modal" onclick="closeDetailModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer" id="modalFooter"></div>
+        </div>
+    </div>
+
+    <!-- Rejection Reason Modal -->
+    <div id="rejectionModal" class="modal">
+        <div class="modal-content rejection-modal-content">
+            <div class="modal-header">
+                <h2>Reason for Rejection</h2>
+                <span class="close-modal" onclick="closeRejectionModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <p>Please provide a reason for rejecting this recipe:</p>
+                <textarea id="rejectionReason" rows="4" placeholder="Enter reason..."></textarea>
+                <input type="hidden" id="rejectionRecipeId">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeRejectionModal()">Cancel</button>
+                <button class="btn-danger" onclick="confirmRejection()">Confirm Rejection</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div id="userDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="userModalName">User Details</h2>
+                <span class="close-modal" onclick="closeUserDetailModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body" id="userModalBody"></div>
+            <div class="modal-footer" id="userModalFooter"></div>
+        </div>
+    </div>
+
+
+    <!-- CREATE USER MODAL OVERLAY -->
+    <div id="createUserModal" class="cu-overlay">
+        <div class="cu-modal">
+            <div class="cu-modal-header">
+                <div class="cu-header-left">
+                    <div class="cu-header-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h2 class="cu-modal-title">Create Account</h2>
+                        <p class="cu-modal-subtitle">Register a new user account</p>
+                    </div>
+                </div>
+                <button class="cu-close-btn" onclick="closeCreateUserModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- ======================== -->
+            <!-- FORM: USER               -->
+            <!-- ======================== -->
+            <form id="cuFormUser" class="cu-form" onsubmit="submitCreateUser(event, 'user')">
+                <div class="cu-divider" id="cuFormDivider">
+                    <span class="cu-divider-text" id="cuDividerText">USER ACCOUNT DETAILS</span>
+                </div>
+
+                <div class="cu-form-grid cu-grid-3">
+                    <div class="cu-field">
+                        <label class="cu-label">First Name <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-id-card cu-input-icon"></i>
+                            <input type="text" name="fname" class="cu-input" placeholder="e.g. Juan" required oninput="validateAdminInput(this, 'fname')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Middle Name</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-id-card cu-input-icon"></i>
+                            <input type="text" name="middle" class="cu-input" placeholder="e.g. Santos" oninput="validateAdminInput(this, 'middle')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Last Name <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-id-card cu-input-icon"></i>
+                            <input type="text" name="lname" class="cu-input" placeholder="e.g. dela Cruz" required oninput="validateAdminInput(this, 'lname')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Extension Name</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-signature cu-input-icon"></i>
+                            <input type="text" name="exname" class="cu-input" placeholder="Jr. / Sr. / III" oninput="validateAdminInput(this, 'exname')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Sex <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap cu-select-wrap">
+                            <i class="fas fa-venus-mars cu-input-icon"></i>
+                             <select name="sex" class="cu-input cu-select" required onchange="validateAdminInput(this, 'sex')">
+                                <option value="">Select sex</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">License / ID No.</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-hashtag cu-input-icon"></i>
+                            <input type="text" name="ldnum" class="cu-input" placeholder="Optional" oninput="validateAdminInput(this, 'ldnum')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Email Address <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-envelope cu-input-icon"></i>
+                            <input type="email" name="emailadd" class="cu-input" placeholder="email@example.com"
+                                required oninput="validateAdminInput(this, 'email')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Username <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-at cu-input-icon"></i>
+                            <input type="text" name="username" class="cu-input" placeholder="Choose a username"
+                                required oninput="validateAdminInput(this, 'username')">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Section -->
+                <div class="cu-section-title"><i class="fas fa-map-marker-alt"></i> Address Information</div>
+                <div class="cu-form-grid cu-grid-3">
+                    <div class="cu-field">
+                        <label class="cu-label">Purok / Block</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-home cu-input-icon"></i>
+                            <input type="text" name="purok" class="cu-input" placeholder="e.g. Purok 1" oninput="validateAdminInput(this, 'purok')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Barangay</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-map cu-input-icon"></i>
+                            <input type="text" name="barangay" class="cu-input" placeholder="e.g. Sta. Cruz" oninput="validateAdminInput(this, 'barangay')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">City / Municipality</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-city cu-input-icon"></i>
+                            <input type="text" name="city" class="cu-input" placeholder="e.g. Manila" oninput="validateAdminInput(this, 'city')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Province</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-map-marked cu-input-icon"></i>
+                            <input type="text" name="province" class="cu-input" placeholder="e.g. Metro Manila" oninput="validateAdminInput(this, 'province')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Country</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-globe cu-input-icon"></i>
+                            <input type="text" name="country" class="cu-input" placeholder="e.g. Philippines" oninput="validateAdminInput(this, 'country')">
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Zip Code</label>
+                        <div class="cu-input-wrap">
+                            <i class="fas fa-mail-bulk cu-input-icon"></i>
+                            <input type="text" name="zipcode" class="cu-input" placeholder="e.g. 1000" oninput="validateAdminInput(this, 'zipcode')">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Section -->
+                <div class="cu-section-title"><i class="fas fa-lock"></i> Security</div>
+                <div class="cu-form-grid cu-grid-2">
+                    <div class="cu-field">
+                        <label class="cu-label">Password <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap cu-password-wrap">
+                            <i class="fas fa-lock cu-input-icon"></i>
+                            <input type="password" name="password" id="cuUserPassword" class="cu-input"
+                                placeholder="Min. 8 characters" required minlength="8" oninput="validateAdminInput(this, 'password')">
+                            <button type="button" class="cu-toggle-pw"
+                                onclick="togglePassword('cuUserPassword', this)"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Confirm Password <span class="cu-req">*</span></label>
+                        <div class="cu-input-wrap cu-password-wrap">
+                            <i class="fas fa-lock cu-input-icon"></i>
+                            <input type="password" name="confirm_password" id="cuUserConfirmPw" class="cu-input"
+                                placeholder="Re-enter password" required oninput="validateAdminInput(this, 'confirm_password')">
+                            <button type="button" class="cu-toggle-pw"
+                                onclick="togglePassword('cuUserConfirmPw', this)"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cu-form-actions">
+                    <button type="button" class="cu-btn-cancel" onclick="closeCreateUserModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="submit" class="cu-btn-submit cu-btn-user" id="cuSubmitBtn">
+                        <i class="fas fa-user-plus"></i> Create User Account
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div id="cuSuccessMsg" class="cu-success-msg" style="display:none;">
+                <div class="cu-success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3 class="cu-success-title">Account Created!</h3>
+                <p class="cu-success-text" id="cuSuccessText">The account has been successfully created.</p>
+                <button class="cu-btn-submit" onclick="resetCreateUserModal()" style="margin-top:16px;">
+                    <i class="fas fa-plus"></i> Create Another
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="Jscript/admin_dashboard.js"></script>
+    <script src="Jscript/admin_users.js?v=VIEW_DETAILS_FIX_2"></script>
+    <script src="Jscript/admin_create_user.js"></script>
+    <script src="Jscript/admin_logs.js"></script>
+    <script src="Jscript/admin_settings.js"></script>
+    <script src="Jscript/account_status_checker.js"></script>
+    <script>
+        // Update sidebar badge count
+        function updateSidebarBadge() {
+            const pendingElement = document.getElementById('pendingCount');
+            if (!pendingElement) return;
+            const pendingCount = pendingElement.textContent;
+            const sidebarBadge = document.getElementById('sidebarPendingCount');
+            if (sidebarBadge) {
+                sidebarBadge.textContent = pendingCount;
+            }
+        }
+
+        // Hook into loadRecipes to update badge after loading
+        const originalLoadRecipes = window.loadRecipes;
+        if (originalLoadRecipes) {
+            window.loadRecipes = function () {
+                originalLoadRecipes();
+                setTimeout(updateSidebarBadge, 500);
+            };
+        }
+
+        // Mobile sidebar toggle (moved here for simplicity or kept if not in JS file)
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if (mobileMenuToggle && sidebar && sidebarOverlay) {
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        }
+    </script>
+
+    <!-- Change Role Modal -->
+    <div id="roleChangeModal" class="cu-overlay">
+        <div class="cu-modal" style="max-width: 500px;">
+            <div class="cu-modal-header">
+                <div class="cu-header-left">
+                    <div class="cu-header-icon" style="background: rgba(124, 58, 237, 0.2); color: #7c3aed;">
+                        <i class="fas fa-user-tag"></i>
+                    </div>
+                    <div>
+                        <h2 class="cu-modal-title" style="color: #fff;">Change User Role</h2>
+                        <p class="cu-modal-subtitle">Update account permissions</p>
+                    </div>
+                </div>
+                <span class="cu-close-btn" onclick="closeRoleChangeModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="cu-form">
+                <div class="cu-section-title">Role Configuration</div>
+                <div class="cu-form-grid">
+                    <div class="cu-field">
+                        <label class="cu-label">Select New Role</label>
+                        <div class="cu-input-wrap cu-select-wrap">
+                            <i class="fas fa-shield-alt cu-input-icon"></i>
+                            <select id="newRoleSelect" class="cu-input cu-select" onchange="updateRoleChangePreview(this.value)">
+                                <option value="user">User - Restricted access</option>
+                                <option value="admin">Admin - Managerial access</option>
+                                <option value="super admin">Super Admin - Full system access</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privileges Preview -->
+                <div class="cu-field" style="margin-top: 1.5rem;">
+                    <p class="cu-role-label">Preview Privileges</p>
+                    <div id="roleChangePrivilegesPreview" class="privilege-tags-wrapper" style="margin-top: 5px; min-height: 40px; padding: 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        <!-- Dynamic Tags -->
+                    </div>
+                </div>
+                <input type="hidden" id="roleChangeUserId">
+                <div class="cu-form-actions">
+                    <button class="cu-btn-cancel" onclick="closeRoleChangeModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button class="cu-btn-submit cu-btn-admin" onclick="submitRoleChange()" id="roleChangeSubmitBtn">
+                        <i class="fas fa-check"></i> Update Role
+                    </button>
+                </div>
+            </div>
+
+            <!-- Role Change Success View -->
+            <div id="roleChangeSuccessMsg" class="cu-success-msg" style="display:none;">
+                <div class="cu-success-icon" style="background: linear-gradient(135deg, #ddd6fe, #c4b5fd); color: #7c3aed;">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3 class="cu-success-title">Role Updated!</h3>
+                <p class="cu-success-text" id="roleChangeSuccessText">The user's role and privileges have been updated successfully.</p>
+                <button class="cu-btn-submit cu-btn-admin" onclick="finishRoleChange()" style="margin-top:16px; width: 100%; justify-content: center;">
+                    <i class="fas fa-check-circle"></i> Finish
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,226 +1,1515 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/dashboard.css">
-    <script language=javascript>document.write(unescape('%3Cscript%20src%3D%22Jscript/script1.js%22%3E%3C/script%3E'))</script>
     <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>HOME</title>
+    <title>Flavoursome - Recipe Discovery Dashboard</title>
 </head>
+
 <body>
-    <header class="hed">
-        <div>
-            <div class="Nav">
-                <ul>
-                    <li><a href="#homes">Home</a></li>
-                    <li><a href="home.html">Logout</a></li>
-                </ul>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">Flavoursome</span>
+                    <span class="logo-tagline">Recipe Finder</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#recipes" class="nav-link"><i class="fas fa-book-open"></i> Recipes</a></li>
+                <li><a href="#favorites" class="nav-link"><i class="fas fa-heart"></i> Favorites</a></li>
+                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="profile-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </button>
+                <a href="javascript:void(0)" class="logout-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
             </div>
         </div>
-        <div class="logo">
-            <label><p>Flavoursome Recipe</p></label>
-        </div>
-    </header>
-    <div class="backs" id="homes">
-        <div class="page1">
-            <div class="carousell"></div>
-                <div class="mySlides fade">
-                  <img src="photos/pics1.png" class="pen1">
-                </div>
-              
-                <div class="mySlides fade">
-                  <img src="photos/pics2.png" class="pen1">
-                </div>
-              
-                <div class="mySlides fade">
-                  <img src="photos/pics3.png" class="pen1">
-                </div>
-              
-                <div class="mySlides fade">
-                  <img src="photos/pics4.png" class="pen1">
-                </div>
-              
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-              </div>
-        </div>
-        <div class="page2">
-            <div class="content">
-                <h4>Unleash Your Culinary Passion</h4>
-                <h1>Discover Taste Sensation</h1>
-                <h3>Taste is Forever</h3>
-            </div>
-        </div>
-    </div><br><br><br><br><br><br><br>
+    </nav>
 
-
-    
-    
-    
-
-
-
-    <!-- End -->
-
-    <div class="page_2">
-        <div class="meal1">
-            <div class="mealimage1">
-                <img src="Foodpic/food1.png" class="mealimage"> 
-            </div>
-            <div class="mealname">
-                <h4>Calderetang Manok</h4>
-            </div>
-            <div class="view1">
-                <button class="btn" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-            </div>
-        </div>
-
-        <div class="meal2"></div>
-            <div class="mealimage2">
-                <img src="Foodpic/FOOD2.jpg" class="mealimage"> 
-            </div> 
-            <div class="mealname2">
-                <h4>Sisig Paella</h4>
-            </div>
-            <div class="view2">
-                <button class="btn1" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-            </div>
-        </div>
-
-        <div class="meal3"></div>
-            <div class="mealimage3">
-                <img src="Foodpic/Food3.jpeg" class="mealimage"> 
-            </div> 
-            <div class="mealname3">
-                <h4>Kung Pao Chicken <br> Recipe</h4>
-            </div>
-            <div class="view3">
-                <button class="btn3" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-            </div>
-        </div>
-
-        <div class="meal4"></div>
-            <div class="mealimage4">
-                <img src="Foodpic/Food4.jpeg" class="mealimage"> 
-            </div> 
-            <div class="mealname4">
-                <h4>Pork Adobo Recipe <br> Recipe</h4>
-            </div>
-            <div class="view4">
-                <button class="btn4" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-            </div>
-        </div>
-
-        <!-- content 2 -->
-            <div class="meal1">
-                <div class="mealimage1">
-                    <img src="Foodpic/Food5.png" class="mealimage"> 
-                </div>
-                <div class="mealname">
-                    <h4>Everything Salmon Sheet Pan Dinner</h4>
-                </div>
-                <div class="view1">
-                    <button class="btn" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-                </div>
-            </div>
-
-            <div class="meal2"></div>
-                <div class="mealimage2">
-                    <img src="Foodpic/Food6.png" class="mealimage"> 
-                </div> 
-                <div class="mealname2">
-                    <h4>Perfect Chicken</h4>
-                </div>
-                <div class="view2">
-                    <button class="btn1" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-                </div>
-            </div>
-
-            <div class="meal3"></div>
-                <div class="mealimage3">
-                    <img src="Foodpic/Food7.png" class="mealimage"> 
-                </div> 
-                <div class="mealname3">
-                    <h4>Baked Teriyaki<br> Chicken</h4>
-                </div>
-                <div class="view3">
-                    <button class="btn3" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-                </div>
-            </div>
-
-            <div class="meal4"></div>
-                <div class="mealimage4">
-                    <img src="Foodpic/Food8.png" class="mealimage"> 
-                </div> 
-                <div class="mealname4">
-                    <h4>Chicken Parmesan</h4><br><br>
-                </div>
-                <div class="view4">
-                    <button class="btn4" onclick="document.getElementById('id01').style.display='block'">View Recipe</button>
-                </div>
-            </div>
+    <!-- Hidden User Session Data -->
+    <div id="userSessionData" style="display: none;">
+        <span id="userEmail"></span>
+        <span id="userFullName"></span>
     </div>
 
-    <div id="class2">
-        <img src="Gif/fooding.gif" class="gef">
-    </div>
-
-    <div>
-        <div class="tiy">
-            <p>Recipe Finder</p>
-        </div>
-    
-        <div class="tif">
-            <p>
-                In my experience while going through college away from home and not being much of a
-                cook at the time(I wasn't a vivid watcher of the Ramsay in 10 series on YouTube), I
-                found myself always with a lot of loose ingredients that I didn't know what to do with.
-                Recipe Finder is an app created with that main focus, where the user can enter a bunch
-                of ingredients in a search bar, and get a list of recipes that match those parameters 
-                and some variations.
-            </p>  
-        </div>
-    </div>
-
-    <section id="foots">
-        <footer class="footer">
-
-            <div class="foot">
-                <div class="footer-section">
-                    <h3>Contact Us</h3><br>
-                    <p>Email: info@foodrecipe.com</p>
-                    <p>Phone: +63 9123456789</p>
-                    <p>Address: 123 Food Street, Gourmet City</p>
-                </div>
-        
-                <div class="footer-section">
-                    <h3>Quick Links</h3><br>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="recipes.html">Recipes</a></li>
-                        <li><a href="login.html">Login</a></li>
-                    </ul>
-                </div>
-        
-                <div class="footer-section">
-                    <h3>Follow Us</h3><br>
-                    <ul class="social-links">
-                        <li><a href="https://facebook.com/foodrecipe" target="_blank"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="https://twitter.com/foodrecipe" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="https://instagram.com/foodrecipe" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="https://linkedin.com/company/foodrecipe" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
+    <!-- Dashboard Header -->
+    <section class="dashboard-header" id="dashboard">
+        <div class="container">
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h1>Welcome!</h1>
+                    <p>Discover delicious recipes tailored to your ingredients</p>
                 </div>
             </div>
-        
-            <div class="footer-bottom">
-                <p>&copy; 2024 Food Recipe | All rights reserved.</p>
+
+            <!-- Advanced Search Bar -->
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input"
+                            placeholder="Search recipes by name, ingredient, or cuisine...">
+                        <button class="search-btn">
+                            <span>Search</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="search-filters">
+                        <button class="filter-tag" data-filter="quick"><i class="fas fa-bolt"></i> Quick Meals</button>
+                        <button class="filter-tag" data-filter="healthy"><i class="fas fa-leaf"></i> Healthy</button>
+                        <button class="filter-tag" data-filter="popular"><i class="fas fa-fire"></i> Popular</button>
+                        <button class="filter-tag" data-filter="new"><i class="fas fa-sparkles"></i> New
+                            Recipes</button>
+                    </div>
+                </div>
             </div>
-        
-        </footer>
+        </div>
     </section>
+
+    <!-- Modal Forms for Each Recipe -->
+
+    <!-- Modal 1: Calderetang Manok -->
+    <div id="modal1" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Calderetang Manok</h2>
+                <span class="close-modal" onclick="closeModal('modal1')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/SWvKa2iLSxY?si=wxGK7fTVHGmpyRdI"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>45 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>4 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 1 kg chicken, cut into serving pieces</li>
+                            <li><span class="check-icon">✓</span> 1 cup tomato sauce</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup liver spread</li>
+                            <li><span class="check-icon">✓</span> 2 medium potatoes, cubed</li>
+                            <li><span class="check-icon">✓</span> 1 large carrot, cubed</li>
+                            <li><span class="check-icon">✓</span> 1 red bell pepper, cut into strips</li>
+                            <li><span class="check-icon">✓</span> 1 green bell pepper, cut into strips</li>
+                            <li><span class="check-icon">✓</span> 1 medium onion, chopped</li>
+                            <li><span class="check-icon">✓</span> 6 cloves garlic, minced</li>
+                            <li><span class="check-icon">✓</span> 2 bay leaves</li>
+                            <li><span class="check-icon">✓</span> 1 cup chicken broth</li>
+                            <li><span class="check-icon">✓</span> 1/4 cup cooking oil</li>
+                            <li><span class="check-icon">✓</span> Salt and pepper to taste</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup green olives (optional)</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Heat oil in a pan and sauté garlic and onion until
+                                fragrant.</li>
+                            <li><span class="step-number">2</span> Add chicken pieces and cook until lightly browned.
+                            </li>
+                            <li><span class="step-number">3</span> Pour in tomato sauce and liver spread. Mix well.</li>
+                            <li><span class="step-number">4</span> Add chicken broth and bay leaves. Bring to a boil.
+                            </li>
+                            <li><span class="step-number">5</span> Simmer for 20-25 minutes or until chicken is tender.
+                            </li>
+                            <li><span class="step-number">6</span> Add potatoes and carrots. Cook until vegetables are
+                                tender.</li>
+                            <li><span class="step-number">7</span> Add bell peppers and olives. Cook for 3-5 minutes.
+                            </li>
+                            <li><span class="step-number">8</span> Season with salt and pepper to taste.</li>
+                            <li><span class="step-number">9</span> Serve hot with steamed rice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Sisig Paella -->
+    <div id="modal2" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Sisig Paella</h2>
+                <span class="close-modal" onclick="closeModal('modal2')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/bS5wxM0vTec?si=GGGPWc3_t2LF8fdb"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>60 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>6 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 2 cups paella rice (or short-grain rice)</li>
+                            <li><span class="check-icon">✓</span> 500g pork belly, diced</li>
+                            <li><span class="check-icon">✓</span> 200g chicken liver, chopped</li>
+                            <li><span class="check-icon">✓</span> 1 large onion, chopped</li>
+                            <li><span class="check-icon">✓</span> 6 cloves garlic, minced</li>
+                            <li><span class="check-icon">✓</span> 3 cups chicken stock</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons soy sauce</li>
+                            <li><span class="check-icon">✓</span> 3 tablespoons calamansi juice (or lemon)</li>
+                            <li><span class="check-icon">✓</span> 2-3 red chili peppers, chopped</li>
+                            <li><span class="check-icon">✓</span> 1 red bell pepper, diced</li>
+                            <li><span class="check-icon">✓</span> 1 green bell pepper, diced</li>
+                            <li><span class="check-icon">✓</span> Salt and pepper to taste</li>
+                            <li><span class="check-icon">✓</span> 2 eggs</li>
+                            <li><span class="check-icon">✓</span> Spring onions for garnish</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Boil pork belly until tender, then grill until
+                                crispy. Dice into small pieces.</li>
+                            <li><span class="step-number">2</span> In a paella pan, sauté garlic and onion until
+                                fragrant.</li>
+                            <li><span class="step-number">3</span> Add pork sisig and chicken liver. Cook until liver is
+                                done.</li>
+                            <li><span class="step-number">4</span> Add rice and stir to coat with oil and flavors.</li>
+                            <li><span class="step-number">5</span> Pour in chicken stock, soy sauce, and calamansi
+                                juice.</li>
+                            <li><span class="step-number">6</span> Add chili peppers, bell peppers. Mix well.</li>
+                            <li><span class="step-number">7</span> Let it simmer without stirring until rice absorbs the
+                                liquid.</li>
+                            <li><span class="step-number">8</span> Lower heat, cover, and cook until rice is tender
+                                (15-20 minutes).</li>
+                            <li><span class="step-number">9</span> Create wells in the rice and crack eggs into them.
+                            </li>
+                            <li><span class="step-number">10</span> Cover and cook until eggs are set.</li>
+                            <li><span class="step-number">11</span> Garnish with spring onions and serve hot.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Kung Pao Chicken -->
+    <div id="modal3" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Kung Pao Chicken</h2>
+                <span class="close-modal" onclick="closeModal('modal3')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/dkIBr4jN54I?si=_5-PBD2Uc9hUseFv"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>30 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>4 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 500g chicken breast, cubed</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup roasted peanuts</li>
+                            <li><span class="check-icon">✓</span> 8-10 dried red chilies</li>
+                            <li><span class="check-icon">✓</span> 1 bell pepper, cubed</li>
+                            <li><span class="check-icon">✓</span> 4 cloves garlic, minced</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon ginger, minced</li>
+                            <li><span class="check-icon">✓</span> 3 green onions, cut into 1-inch pieces</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons soy sauce</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon rice vinegar</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon Chinese rice wine (or dry sherry)</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon sugar</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon cornstarch</li>
+                            <li><span class="check-icon">✓</span> 2 teaspoons sesame oil</li>
+                            <li><span class="check-icon">✓</span> 3 tablespoons vegetable oil</li>
+                            <li><span class="check-icon">✓</span> Salt to taste</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Marinate chicken with 1 tbsp soy sauce, rice wine,
+                                and cornstarch for 15 minutes.</li>
+                            <li><span class="step-number">2</span> Mix sauce: remaining soy sauce, vinegar, sugar,
+                                sesame oil, and 2 tbsp water.</li>
+                            <li><span class="step-number">3</span> Heat oil in a wok over high heat.</li>
+                            <li><span class="step-number">4</span> Add dried chilies and stir-fry for 30 seconds until
+                                fragrant.</li>
+                            <li><span class="step-number">5</span> Add chicken and stir-fry until cooked through (5-6
+                                minutes).</li>
+                            <li><span class="step-number">6</span> Add garlic and ginger, stir-fry for 30 seconds.</li>
+                            <li><span class="step-number">7</span> Add bell pepper and stir-fry for 2 minutes.</li>
+                            <li><span class="step-number">8</span> Pour in the sauce and mix well.</li>
+                            <li><span class="step-number">9</span> Add peanuts and green onions. Toss everything
+                                together.</li>
+                            <li><span class="step-number">10</span> Cook for 1-2 minutes until sauce thickens.</li>
+                            <li><span class="step-number">11</span> Serve hot with steamed rice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Pork Adobo -->
+    <div id="modal4" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Pork Adobo</h2>
+                <span class="close-modal" onclick="closeModal('modal4')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/OTGASYe7hQk?si=Uw2qGCXBdd1Z-4Ef"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>50 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>5 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 1 kg pork belly, cut into chunks</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup soy sauce</li>
+                            <li><span class="check-icon">✓</span> 1/3 cup white vinegar</li>
+                            <li><span class="check-icon">✓</span> 6 cloves garlic, crushed</li>
+                            <li><span class="check-icon">✓</span> 3 bay leaves</li>
+                            <li><span class="check-icon">✓</span> 1 teaspoon whole black peppercorns</li>
+                            <li><span class="check-icon">✓</span> 1 cup water</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons cooking oil</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon sugar (optional)</li>
+                            <li><span class="check-icon">✓</span> Salt to taste</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Combine pork, soy sauce, vinegar, garlic, bay leaves,
+                                and peppercorns in a bowl.</li>
+                            <li><span class="step-number">2</span> Marinate for at least 30 minutes (overnight for best
+                                results).</li>
+                            <li><span class="step-number">3</span> Transfer everything to a pot and add water.</li>
+                            <li><span class="step-number">4</span> Bring to a boil, then lower heat and simmer for 40-50
+                                minutes until pork is tender.</li>
+                            <li><span class="step-number">5</span> Remove pork from the sauce and set aside.</li>
+                            <li><span class="step-number">6</span> Heat oil in a pan and fry pork pieces until browned
+                                on all sides.</li>
+                            <li><span class="step-number">7</span> Pour the sauce back into the pan with the pork.</li>
+                            <li><span class="step-number">8</span> Add sugar if desired. Simmer until sauce reduces and
+                                thickens.</li>
+                            <li><span class="step-number">9</span> Adjust seasoning with salt if needed.</li>
+                            <li><span class="step-number">10</span> Serve hot with steamed rice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Salmon Sheet Pan Dinner -->
+    <div id="modal5" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Everything Salmon Sheet Pan Dinner</h2>
+                <span class="close-modal" onclick="closeModal('modal5')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/ml-6RKJ4XDc?si=0z70s_F467qhL4eL"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>25 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>2 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 4 salmon fillets (6 oz each)</li>
+                            <li><span class="check-icon">✓</span> 2 cups broccoli florets</li>
+                            <li><span class="check-icon">✓</span> 2 cups baby potatoes, halved</li>
+                            <li><span class="check-icon">✓</span> 1 red bell pepper, sliced</li>
+                            <li><span class="check-icon">✓</span> 1 yellow bell pepper, sliced</li>
+                            <li><span class="check-icon">✓</span> 3 tablespoons olive oil</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons everything bagel seasoning</li>
+                            <li><span class="check-icon">✓</span> 1 teaspoon garlic powder</li>
+                            <li><span class="check-icon">✓</span> 1 lemon, sliced</li>
+                            <li><span class="check-icon">✓</span> Salt and pepper to taste</li>
+                            <li><span class="check-icon">✓</span> Fresh dill for garnish</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Preheat oven to 400°F (200°C).</li>
+                            <li><span class="step-number">2</span> Line a large baking sheet with parchment paper.</li>
+                            <li><span class="step-number">3</span> Toss potatoes with 1 tbsp olive oil, salt, and
+                                pepper. Arrange on one side of the sheet.</li>
+                            <li><span class="step-number">4</span> Roast potatoes for 15 minutes.</li>
+                            <li><span class="step-number">5</span> Remove sheet from oven. Add broccoli and bell
+                                peppers. Drizzle with 1 tbsp olive oil.</li>
+                            <li><span class="step-number">6</span> Place salmon fillets on the sheet. Brush with
+                                remaining olive oil.</li>
+                            <li><span class="step-number">7</span> Sprinkle everything bagel seasoning and garlic powder
+                                over salmon.</li>
+                            <li><span class="step-number">8</span> Add lemon slices on top of salmon.</li>
+                            <li><span class="step-number">9</span> Return to oven and bake for 12-15 minutes until
+                                salmon is cooked through.</li>
+                            <li><span class="step-number">10</span> Garnish with fresh dill and serve immediately.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Perfect Chicken -->
+    <div id="modal6" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Perfect Roasted Chicken</h2>
+                <span class="close-modal" onclick="closeModal('modal6')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/b30uF6KTfNA?si=YA8KNNfLLDd_eUy4"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>90 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>4 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 1 whole chicken (3-4 lbs)</li>
+                            <li><span class="check-icon">✓</span> 4 tablespoons butter, softened</li>
+                            <li><span class="check-icon">✓</span> 4 cloves garlic, minced</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons fresh herbs (rosemary, thyme, parsley)
+                            </li>
+                            <li><span class="check-icon">✓</span> 1 lemon, halved</li>
+                            <li><span class="check-icon">✓</span> 1 onion, quartered</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons olive oil</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon paprika</li>
+                            <li><span class="check-icon">✓</span> Salt and black pepper to taste</li>
+                            <li><span class="check-icon">✓</span> 1 cup chicken broth</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Preheat oven to 425°F (220°C).</li>
+                            <li><span class="step-number">2</span> Pat chicken dry with paper towels.</li>
+                            <li><span class="step-number">3</span> Mix butter, garlic, and herbs together.</li>
+                            <li><span class="step-number">4</span> Gently separate chicken skin from meat and spread
+                                herb butter underneath.</li>
+                            <li><span class="step-number">5</span> Stuff cavity with lemon halves and onion quarters.
+                            </li>
+                            <li><span class="step-number">6</span> Rub outside with olive oil, paprika, salt, and
+                                pepper.</li>
+                            <li><span class="step-number">7</span> Tie legs together with kitchen string.</li>
+                            <li><span class="step-number">8</span> Place chicken breast-side up in a roasting pan. Pour
+                                broth in the bottom.</li>
+                            <li><span class="step-number">9</span> Roast for 60-75 minutes, basting every 20 minutes.
+                            </li>
+                            <li><span class="step-number">10</span> Chicken is done when internal temperature reaches
+                                165°F (74°C).</li>
+                            <li><span class="step-number">11</span> Let rest for 10-15 minutes before carving.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 7: Baked Teriyaki Chicken -->
+    <div id="modal7" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Baked Teriyaki Chicken</h2>
+                <span class="close-modal" onclick="closeModal('modal7')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/n2fMN_XVzFY?si=nBSjKMlXAzhwD8sR"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>40 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>4 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 6 chicken thighs (boneless, skinless)</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup soy sauce</li>
+                            <li><span class="check-icon">✓</span> 1/4 cup honey</li>
+                            <li><span class="check-icon">✓</span> 1/4 cup mirin (or rice wine)</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons brown sugar</li>
+                            <li><span class="check-icon">✓</span> 4 cloves garlic, minced</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon fresh ginger, grated</li>
+                            <li><span class="check-icon">✓</span> 1 tablespoon cornstarch</li>
+                            <li><span class="check-icon">✓</span> 2 tablespoons water</li>
+                            <li><span class="check-icon">✓</span> Sesame seeds for garnish</li>
+                            <li><span class="check-icon">✓</span> Green onions, sliced for garnish</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Preheat oven to 375°F (190°C).</li>
+                            <li><span class="step-number">2</span> In a bowl, mix soy sauce, honey, mirin, brown sugar,
+                                garlic, and ginger.</li>
+                            <li><span class="step-number">3</span> Reserve 1/4 cup of sauce for later. Pour rest over
+                                chicken and marinate for 30 minutes.</li>
+                            <li><span class="step-number">4</span> Place chicken in a baking dish and pour marinade over
+                                it.</li>
+                            <li><span class="step-number">5</span> Bake for 25-30 minutes, turning halfway through.</li>
+                            <li><span class="step-number">6</span> Meanwhile, mix cornstarch with water to make a
+                                slurry.</li>
+                            <li><span class="step-number">7</span> Remove chicken from oven and place on a serving
+                                plate.</li>
+                            <li><span class="step-number">8</span> Pour pan juices into a saucepan, add reserved sauce
+                                and cornstarch slurry.</li>
+                            <li><span class="step-number">9</span> Simmer until sauce thickens (2-3 minutes).</li>
+                            <li><span class="step-number">10</span> Pour sauce over chicken, garnish with sesame seeds
+                                and green onions.</li>
+                            <li><span class="step-number">11</span> Serve with steamed rice and vegetables.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8: Chicken Parmesan -->
+    <div id="modal8" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-utensils"></i> Chicken Parmesan</h2>
+                <span class="close-modal" onclick="closeModal('modal8')">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="video-section">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/gWJAirwCl8U?si=0SBo-6iGybvWe-Eb"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>35 minutes</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>4 servings</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="ingredients-section">
+                        <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                        <ul class="ingredients-list">
+                            <li><span class="check-icon">✓</span> 4 chicken breasts, pounded thin</li>
+                            <li><span class="check-icon">✓</span> 2 cups marinara sauce</li>
+                            <li><span class="check-icon">✓</span> 1 1/2 cups mozzarella cheese, shredded</li>
+                            <li><span class="check-icon">✓</span> 1/2 cup parmesan cheese, grated</li>
+                            <li><span class="check-icon">✓</span> 1 cup all-purpose flour</li>
+                            <li><span class="check-icon">✓</span> 2 eggs, beaten</li>
+                            <li><span class="check-icon">✓</span> 2 cups Italian breadcrumbs</li>
+                            <li><span class="check-icon">✓</span> 1/4 cup vegetable oil</li>
+                            <li><span class="check-icon">✓</span> 1 teaspoon Italian seasoning</li>
+                            <li><span class="check-icon">✓</span> Salt and pepper to taste</li>
+                            <li><span class="check-icon">✓</span> Fresh basil for garnish</li>
+                            <li><span class="check-icon">✓</span> Cooked spaghetti for serving</li>
+                        </ul>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h3><i class="fas fa-tasks"></i> Instructions</h3>
+                        <ol class="instructions-list">
+                            <li><span class="step-number">1</span> Preheat oven to 400°F (200°C).</li>
+                            <li><span class="step-number">2</span> Season chicken with salt, pepper, and Italian
+                                seasoning.</li>
+                            <li><span class="step-number">3</span> Set up breading station: flour in one dish, beaten
+                                eggs in another, breadcrumbs in third.</li>
+                            <li><span class="step-number">4</span> Coat each chicken breast in flour, then egg, then
+                                breadcrumbs.</li>
+                            <li><span class="step-number">5</span> Heat oil in a large skillet over medium-high heat.
+                            </li>
+                            <li><span class="step-number">6</span> Fry chicken for 3-4 minutes per side until golden
+                                brown.</li>
+                            <li><span class="step-number">7</span> Spread 1 cup marinara sauce in a baking dish.</li>
+                            <li><span class="step-number">8</span> Place fried chicken on top of sauce.</li>
+                            <li><span class="step-number">9</span> Spoon remaining marinara over each chicken breast.
+                            </li>
+                            <li><span class="step-number">10</span> Top with mozzarella and parmesan cheese.</li>
+                            <li><span class="step-number">11</span> Bake for 15-20 minutes until cheese is melted and
+                                bubbly.</li>
+                            <li><span class="step-number">12</span> Garnish with fresh basil and serve over spaghetti.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Recipe Modal -->
+    <div id="addRecipeModal" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Submit Your Recipe</h2>
+                <span class="close-modal" onclick="closeAddRecipeModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <form id="addRecipeForm" enctype="multipart/form-data">
+                    <div class="recipe-content">
+                        <!-- Recipe Image Upload -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-camera"></i> Recipe Photo</h3>
+                            <div class="image-upload-container">
+                                <div class="image-preview" id="imagePreview">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload or drag & drop</p>
+                                    <span class="upload-hint">JPG, PNG or GIF (Max 5MB)</span>
+                                </div>
+                                <input type="file" id="recipeImage" name="recipe_image" accept="image/*" required
+                                    hidden>
+                            </div>
+                        </div>
+
+                        <!-- Basic Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="recipeName">Recipe Name *</label>
+                                    <input type="text" id="recipeName" name="recipe_name"
+                                        placeholder="e.g., Chicken Adobo" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category">Category *</label>
+                                    <select id="category" name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Filipino">Filipino</option>
+                                        <option value="Asian">Asian</option>
+                                        <option value="Western">Western</option>
+                                        <option value="Healthy">Healthy</option>
+                                        <option value="Dessert">Dessert</option>
+                                        <option value="Appetizer">Appetizer</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="difficulty">Difficulty Level *</label>
+                                    <select id="difficulty" name="difficulty" required>
+                                        <option value="">Select Difficulty</option>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prepTime">Preparation Time *</label>
+                                    <input type="text" id="prepTime" name="prep_time" placeholder="e.g., 30 minutes"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="servings">Servings *</label>
+                                    <input type="number" id="servings" name="servings" min="1" placeholder="e.g., 4"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="submittedBy">Your Name (Optional)</label>
+                                    <input type="text" id="submittedBy" name="submitted_by" placeholder="Your name">
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label for="submittedEmail">Your Email</label>
+                                    <input type="email" id="submittedEmail" name="submitted_email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ingredients -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                            <div class="form-group">
+                                <label for="ingredients">List all ingredients (one per line) *</label>
+                                <textarea id="ingredients" name="ingredients" rows="8"
+                                    placeholder="1 kg chicken, cut into pieces&#10;1/2 cup soy sauce&#10;1/3 cup vinegar&#10;6 cloves garlic, crushed&#10;..."
+                                    required></textarea>
+                                <span class="field-hint">Enter each ingredient on a new line</span>
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-tasks"></i> Cooking Instructions</h3>
+                            <div class="form-group">
+                                <label for="instructions">Step-by-step instructions (one step per line) *</label>
+                                <textarea id="instructions" name="instructions" rows="10"
+                                    placeholder="1. Heat oil in a pan&#10;2. Sauté garlic until fragrant&#10;3. Add chicken and cook until browned&#10;..."
+                                    required></textarea>
+                                <span class="field-hint">Number each step and put them on separate lines</span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="closeAddRecipeModal()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Submit Recipe
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Recipe Modal -->
+    <div id="editRecipeModal" class="recipe-modal">
+        <div class="modal-content-recipe">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Recipe</h2>
+                <span class="close-modal" onclick="closeEditRecipeModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body">
+                <form id="editRecipeForm" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="update_recipe">
+                    <input type="hidden" id="editRecipeId" name="recipe_id">
+
+                    <div class="recipe-content">
+                        <!-- Recipe Image Upload -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-camera"></i> Edit Recipe Photo</h3>
+                            <div class="image-upload-container">
+                                <div class="image-preview" id="editImagePreview">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to change image</p>
+                                </div>
+                                <input type="file" id="editRecipeImage" name="recipe_image" accept="image/*" hidden>
+                            </div>
+                        </div>
+
+                        <!-- Basic Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="editRecipeName">Recipe Name *</label>
+                                    <input type="text" id="editRecipeName" name="recipe_name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editCategory">Category *</label>
+                                    <select id="editCategory" name="category" required>
+                                        <option value="Filipino">Filipino</option>
+                                        <option value="Asian">Asian</option>
+                                        <option value="Western">Western</option>
+                                        <option value="Healthy">Healthy</option>
+                                        <option value="Dessert">Dessert</option>
+                                        <option value="Appetizer">Appetizer</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editDifficulty">Difficulty Level *</label>
+                                    <select id="editDifficulty" name="difficulty" required>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editPrepTime">Preparation Time *</label>
+                                    <input type="text" id="editPrepTime" name="prep_time" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editServings">Servings *</label>
+                                    <input type="number" id="editServings" name="servings" min="1" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ingredients -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-list-ul"></i> Ingredients</h3>
+                            <div class="form-group">
+                                <label for="editIngredients">List all ingredients (one per line) *</label>
+                                <textarea id="editIngredients" name="ingredients" rows="8" required></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-tasks"></i> Cooking Instructions</h3>
+                            <div class="form-group">
+                                <label for="editInstructions">Step-by-step instructions (one step per line) *</label>
+                                <textarea id="editInstructions" name="instructions" rows="10" required></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Update Button -->
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="closeEditRecipeModal()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Categories -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore by Category</h2>
+                <button class="view-all-btn">View All <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-overlay"></div>
+                    <img src="Foodpic/food1.png" alt="Filipino Cuisine">
+                    <div class="category-content">
+                        <h3>Filipino Cuisine</h3>
+                        <p>234 recipes</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-overlay"></div>
+                    <img src="Foodpic/Food3.jpeg" alt="Asian Fusion">
+                    <div class="category-content">
+                        <h3>Asian Fusion</h3>
+                        <p>189 recipes</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-overlay"></div>
+                    <img src="Foodpic/Food5.png" alt="Healthy Options">
+                    <div class="category-content">
+                        <h3>Healthy Options</h3>
+                        <p>312 recipes</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-overlay"></div>
+                    <img src="Foodpic/Food8.png" alt="Western Classic">
+                    <div class="category-content">
+                        <h3>Western Classic</h3>
+                        <p>156 recipes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Recipes -->
+    <section class="recipes-section" id="recipes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Recipes</h2>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <!-- ADD NEW RECIPE BUTTON -->
+                    <button class="add-recipe-btn" onclick="openAddRecipeModal()">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add New Recipe</span>
+                    </button>
+
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-category="all">All Recipes</button>
+                        <button class="filter-btn" data-category="Filipino">Filipino</button>
+                        <button class="filter-btn" data-category="Asian">Asian</button>
+                        <button class="filter-btn" data-category="Western">Western</button>
+                        <button class="filter-btn" data-category="Healthy">Healthy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipes-grid">
+                <!-- Recipe Card 1 -->
+                <div class="recipe-card" data-category="Filipino">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/food1.png" alt="Calderetang Manok" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge filipino">Filipino</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Calderetang Manok</h3>
+                        <p class="recipe-description">Traditional Filipino chicken stew with rich tomato sauce</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>45 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Medium</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.5</span>
+                                <span class="reviews">(120 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal1')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 2 -->
+                <div class="recipe-card" data-category="Filipino">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/FOOD2.jpg" alt="Sisig Paella" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge fusion">Fusion</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Sisig Paella</h3>
+                        <p class="recipe-description">Innovative fusion of Filipino sisig and Spanish paella</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>60 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Hard</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>6 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                                <span class="reviews">(89 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal2')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 3 -->
+                <div class="recipe-card" data-category="Asian">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food3.jpeg" alt="Kung Pao Chicken" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge chinese">Chinese</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Kung Pao Chicken</h3>
+                        <p class="recipe-description">Spicy Sichuan dish with peanuts and dried chilies</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>30 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Easy</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.2</span>
+                                <span class="reviews">(156 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal3')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 4 -->
+                <div class="recipe-card" data-category="Filipino">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food4.jpeg" alt="Pork Adobo" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge filipino">Filipino</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Pork Adobo</h3>
+                        <p class="recipe-description">Classic Filipino braised pork in soy sauce and vinegar</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>50 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Easy</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>5 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                                <span class="reviews">(234 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal4')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 5 -->
+                <div class="recipe-card" data-category="Healthy">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food5.png" alt="Salmon Sheet Pan Dinner" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge healthy">Healthy</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Salmon Sheet Pan Dinner</h3>
+                        <p class="recipe-description">One-pan meal with roasted salmon and vegetables</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>25 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Easy</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>2 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                                <span class="reviews">(78 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal5')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 6 -->
+                <div class="recipe-card" data-category="Western">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food6.png" alt="Perfect Roast Chicken" class="recipe-img">
+
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+
+                        <span class="recipe-badge classic">Classic</span>
+                    </div>
+
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Perfect Roast Chicken</h3>
+                        <p class="recipe-description">Crispy skin and juicy meat with herbs</p>
+
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>90 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Medium</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 servings</span>
+                            </div>
+                        </div>
+
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                                <span class="reviews">(201 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal6')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Recipe Card 7 -->
+                <div class="recipe-card" data-category="Asian">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food7.png" alt="Baked Teriyaki Chicken" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge japanese">Japanese</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Baked Teriyaki Chicken</h3>
+                        <p class="recipe-description">Sweet and savory glazed chicken thighs</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>40 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Easy</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.3</span>
+                                <span class="reviews">(145 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal7')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 8 -->
+                <div class="recipe-card" data-category="Western">
+                    <div class="recipe-image-wrapper">
+                        <img src="Foodpic/Food8.png" alt="Chicken Parmesan" class="recipe-img">
+                        <div class="recipe-overlay">
+                            <button class="overlay-btn favorite-btn"><i class="far fa-heart"></i></button>
+                            <button class="overlay-btn share-btn"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                        <span class="recipe-badge italian">Italian</span>
+                    </div>
+                    <div class="recipe-details">
+                        <h3 class="recipe-name">Chicken Parmesan</h3>
+                        <p class="recipe-description">Breaded chicken with marinara and melted cheese</p>
+                        <div class="recipe-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <span>35 min</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-signal"></i>
+                                <span>Medium</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>4 servings</span>
+                            </div>
+                        </div>
+                        <div class="recipe-footer">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                                <span class="reviews">(189 reviews)</span>
+                            </div>
+                            <button class="view-btn" onclick="openModal('modal8')">View Recipe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="about-badge">About Flavoursome</span>
+                    <h2>Your Smart Kitchen Companion</h2>
+                    <p>Flavoursome is an intelligent recipe finder designed to help you make the most of your
+                        ingredients. Whether you're a busy professional or a culinary enthusiast, we make cooking
+                        simple, enjoyable, and waste-free.</p>
+                    <div class="features-list">
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Smart Matching</h4>
+                                <p>AI-powered ingredient recognition</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Step-by-Step</h4>
+                                <p>Detailed cooking instructions</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Nutrition Info</h4>
+                                <p>Track your dietary goals</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-bookmark"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Save Favorites</h4>
+                                <p>Build your personal cookbook</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <img src="Gif/fooding.gif" alt="Cooking Animation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-utensils"></i>
+                        <span>Flavoursome</span>
+                    </div>
+                    <p>Discover your next favorite dish with our intelligent recipe finder platform.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#recipes">Recipes</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Filipino Cuisine</a></li>
+                        <li><a href="#">Asian Fusion</a></li>
+                        <li><a href="#">Western Classic</a></li>
+                        <li><a href="#">Healthy Options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> info@flavoursome.com</li>
+                        <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Quezon City, Metro Manila</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flavoursome Recipe Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Jscript/Dashboard.js"></script>
+    <script src="Jscript/additionrecipe.js"></script>
+    <script src="Jscript/account_status_checker.js"></script>
+    <script>
+        // ===================================
+        // MODAL FUNCTIONALITY FOR RECIPES
+        // ===================================
+
+        // Function to open modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden"; // Prevent background scrolling
+
+                // Add animation
+                const modalContent = modal.querySelector('.modal-content-recipe');
+                modalContent.style.animation = 'modalSlideIn 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000)';
+            }
+        }
+
+
+        // Function to close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                const modalContent = modal.querySelector('.modal-content-recipe');
+                modalContent.style.animation = 'modalSlideOut 0.3s ease';
+
+                setTimeout(() => {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "auto"; // Restore scrolling
+
+                    // Stop YouTube video when closing modal
+                    const iframe = modal.querySelector('iframe');
+                    if (iframe) {
+                        const iframeSrc = iframe.src;
+                        iframe.src = iframeSrc; // Reload iframe to stop video
+                    }
+                }, 300);
+            }
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function (event) {
+            const modals = document.querySelectorAll('.recipe-modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    const modalId = modal.id;
+                    closeModal(modalId);
+                }
+            });
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                const modals = document.querySelectorAll('.recipe-modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === "flex" || modal.style.display === "block") {
+                        closeModal(modal.id);
+                    }
+                });
+            }
+        });
+
+        // Prevent modal content click from closing modal
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalContents = document.querySelectorAll('.modal-content-recipe');
+            modalContents.forEach(content => {
+                content.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+        });
+
+        console.log('Modal script loaded successfully!');
+    </script>
 </body>
+
 </html>

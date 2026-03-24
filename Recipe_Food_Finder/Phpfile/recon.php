@@ -42,8 +42,8 @@ $a3    = $_POST['answer3'];
 
 // Insert data into the database
 // Added q1_id, a1, q2_id, a2, q3_id, a3 to the columns and values list
-$sql = "INSERT INTO user_reg (fname, middle, lname, exname, idnum, username, emailadd, sex, date, age, password, purok, barangay, city, province, country, zipcode, q1_id, a1, q2_id, a2, q3_id, a3) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO user_reg (fname, middle, lname, exname, idnum, username, emailadd, sex, date, age, password, purok, barangay, city, province, country, zipcode, status, q1_id, a1, q2_id, a2, q3_id, a3) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'inactive', ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 

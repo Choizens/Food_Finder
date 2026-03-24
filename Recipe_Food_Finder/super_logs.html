@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/admin_dashboard.css">
+    <link rel="stylesheet" href="style/admin_logs.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
+    <title>Flavoursome - Activity Logs</title>
+</head>
+
+<body>
+    <!-- Hidden User Session Data -->
+    <div id="userSessionData" style="display: none;">
+        <span id="userEmail"></span>
+        <span id="userFullName"></span>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <span class="sidebar-logo-name">Flavoursome</span>
+                <span class="sidebar-logo-tagline">Super Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <nav class="sidebar-menu">
+            <!-- Main Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Main</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_dashboard.html#dashboard" class="sidebar-menu-link" data-section="dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_requests.html#requests" class="sidebar-menu-link" data-section="requests">
+                            <i class="fas fa-bell"></i>
+                            <span>Administrative Requests</span>
+                            <span id="requestCountBadge" class="badge-counter" style="display:none; background: #EF4444; color: white; border-radius: 10px; padding: 2px 6px; font-size: 0.7em; margin-left: auto;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Management Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Management</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_users.html#users" class="sidebar-menu-link" data-section="users">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipe_requests.html#recipes" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-tasks"></i>
+                            <span>Recipe Requests</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipes.html#recipesModule" class="sidebar-menu-link" data-section="recipesModule">
+                            <i class="fas fa-utensils"></i>
+                            <span>Recipes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_logs.html#logs" class="sidebar-menu-link active" data-section="logs">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Activity Logs</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_settings.html#settings" class="sidebar-menu-link" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>System Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name" id="sidebarUsername">Super Admin</div>
+                    <div class="sidebar-user-role">Super Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-title">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="pageTitle">Activity Logs</h1>
+                        <div class="nav-breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span id="breadcrumbCurrent">Logs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">0</span>
+                    </div>
+                    <button class="profile-btn">
+                        <i class="fas fa-user-shield"></i>
+                        <span id="navUsername">Super Admin</span>
+                    </button>
+
+                    <button class="logout-btn-red" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- LOGS SECTION -->
+        <div id="logsSection">
+            <div class="container" style="padding:2rem;">
+
+                <!-- Page Header (Unifying with Admin Side) -->
+                <div class="welcome-section" style="padding:1rem 0 1.5rem;">
+                    <div class="welcome-text">
+                        <h1>System Activity Logs</h1>
+                        <p>Track all login events, administrative actions, and system-wide activity</p>
+                    </div>
+                </div>
+
+                <!-- Logs Statistics -->
+                <div class="logs-stats-grid">
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon all"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatTotal">0</h4>
+                            <p>Total Events</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon login"><i class="fas fa-sign-in-alt"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatLogins">0</h4>
+                            <p>Logins</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon logout bg-orange" style="background: linear-gradient(135deg, #FF9800, #F57C00);"><i class="fas fa-sign-out-alt"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatLogouts">0</h4>
+                            <p>Logouts</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon status"><i class="fas fa-toggle-on"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatStatus">0</h4>
+                            <p>Status Changes</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon create"><i class="fas fa-user-plus"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatCreates">0</h4>
+                            <p>Accounts Created</p>
+                        </div>
+                    </div>
+                    <div class="log-stat-card">
+                        <div class="log-stat-icon delete"><i class="fas fa-trash-alt"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatDeletes">0</h4>
+                            <p>Deletions</p>
+                        </div>
+                    </div>
+                    <!-- New Stat for Roles - Hidden in Admin UI but useful here if Super Admin adds it -->
+                    <div class="log-stat-card" style="display: none;">
+                        <div class="log-stat-icon role"><i class="fas fa-user-tag"></i></div>
+                        <div class="log-stat-info">
+                            <h4 id="logStatRoles">0</h4>
+                            <p>Role Changes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls: filter pills + search + refresh -->
+                <div class="logs-controls">
+                    <div class="logs-filter-pills">
+                        <button class="log-filter-pill active" data-type="all"><i class="fas fa-list"></i> All Logs</button>
+                        <button class="log-filter-pill pill-login" data-type="login"><i class="fas fa-sign-in-alt"></i> Logins</button>
+                        <button class="log-filter-pill pill-status" data-type="status_update"><i class="fas fa-toggle-on"></i> Status</button>
+                        <button class="log-filter-pill pill-create" data-type="create_user"><i class="fas fa-user-plus"></i> Creates</button>
+                        <button class="log-filter-pill pill-delete" data-type="user_delete"><i class="fas fa-trash-alt"></i> Deletes</button>
+                        <button class="log-filter-pill pill-role" data-type="role_update"><i class="fas fa-user-tag"></i> Roles</button>
+                    </div>
+                    <div class="logs-search-wrap">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="logsSearchInput" class="logs-search-input" placeholder="Search logs…">
+                    </div>
+                    <button class="logs-refresh-btn" onclick="fetchAndDisplayLogs()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Table Container -->
+                <div class="logs-table-container" id="logsTableContainer">
+                    <div class="logs-table-header">
+                        <h3><i class="fas fa-history"></i> Event History</h3>
+                        <span class="logs-count-badge" id="logsCountBadge">— entries</span>
+                    </div>
+                    <div class="logs-table-scroll">
+                        <table class="logs-table">
+                            <thead>
+                                <!-- Thead is populated by admin_logs.js -->
+                            </thead>
+                            <tbody id="logsTableBody">
+                                <tr>
+                                    <td colspan="8" class="logs-loading">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading logs…
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="logs-pagination">
+                        <span class="logs-pagination-info" id="logsPaginationInfo">Loading…</span>
+                        <div class="logs-pagination-btns" id="logsPaginationBtns"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Flavoursome Recipe Finder - Super Admin Panel. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="Jscript/admin_dashboard.js"></script>
+    <script src="Jscript/admin_logs.js"></script>
+    <script>
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof initializeLogs === 'function') {
+                initializeLogs();
+            }
+        });
+    </script>
+    <script src="Jscript/account_status_checker.js"></script>
+</body>
+</html>

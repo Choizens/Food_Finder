@@ -36,6 +36,19 @@ function togglePassword(id) {
     }
 }
 
+function toggleVisibility(id, icon) {
+    const field = document.getElementById(id);
+    if (field.type === "password") {
+        field.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        field.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
 let isSubmitting = false; // Add a flag to prevent multiple submissions
 
 async function validateForm(event) {
@@ -1485,3 +1498,84 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'home.html'; // Redirect to your login page
     }
 });
+// Function to validate only Step 1 fields
+async function validateRegisterStep1() {
+    let validationPassed = true;
+    
+    const fields = {
+        firstName: document.getElementById("firstName"),
+        middleName: document.getElementById("middleInitial"),
+        lastName: document.getElementById("lastName"),
+        idNo: document.getElementById("idInput"),
+        email: document.getElementById("emailInput"), // Fixed ID
+        username: document.getElementById("username"),
+        password: document.getElementById("password"),
+        confirmPassword: document.getElementById("confirmPassword"),
+        birthdate: document.getElementById("custom-birthdate"),
+        gender: document.getElementById("sex"),
+        purok: document.getElementById("purok"),
+        barangay: document.getElementById("barangay"),
+        city: document.getElementById("city"),
+        province: document.getElementById("province"),
+        country: document.getElementById("country"),
+        zipCode: document.getElementById("zipCode"),
+    };
+
+    // Check individual fields
+    if (fields.firstName && !validateName(fields.firstName)) validationPassed = false;
+    if (fields.middleName && !validateMid(fields.middleName)) validationPassed = false;
+    if (fields.lastName && !validateLast(fields.lastName)) validationPassed = false;
+    if (fields.gender && !validateSex(fields.gender)) validationPassed = false;
+    
+    if (fields.idNo) {
+        if (!await validateNumber(fields.idNo)) validationPassed = false;
+    }
+    
+    if (fields.email && !validateEmail(fields.email)) validationPassed = false;
+    
+    if (fields.username) {
+        if (!await validateUser(fields.username)) validationPassed = false;
+    }
+    
+    if (fields.password) {
+        const passwordValue = fields.password.value.trim();
+        if (!validatePasswordStrength(passwordValue)) validationPassed = false;
+        
+        if (fields.confirmPassword) {
+            const confirmPasswordValue = fields.confirmPassword.value.trim();
+            const matchMessageLabel = document.getElementById("message100");
+            if (!validatePasswordMatch(passwordValue, confirmPasswordValue, matchMessageLabel)) {
+                validationPassed = false;
+            }
+        }
+    }
+    
+    if (fields.birthdate) {
+        calculateAge();
+        const ageMessage = document.getElementById('message16');
+        if (ageMessage && ageMessage.textContent.trim()) {
+            validationPassed = false;
+        }
+        if (!fields.birthdate.value) {
+            if (ageMessage) ageMessage.textContent = "Birthday cannot be empty.";
+            validationPassed = false;
+        }
+    }
+
+    if (fields.purok && !validatePurok(fields.purok)) validationPassed = false;
+    if (fields.barangay && !validateBarangay(fields.barangay)) validationPassed = false;
+    if (fields.city && !validateCity(fields.city)) validationPassed = false;
+    if (fields.province && !validateProvince(fields.province)) validationPassed = false;
+    if (fields.country && !validateCountry(fields.country)) validationPassed = false;
+    if (fields.zipCode && !validateZip(fields.zipCode)) validationPassed = false;
+
+    if (!validationPassed) {
+        Swal.fire({
+            icon: "warning",
+            title: "Wait!",
+            text: "Please complete the profile information correctly before proceeding.",
+        });
+    }
+    
+    return validationPassed;
+}

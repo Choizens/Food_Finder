@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/admin_dashboard.css">
+    <link rel="stylesheet" href="style/admin_users.css">
+    <link rel="stylesheet" href="style/admin_create_user.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin='anonymous'></script>
+    <title>Flavoursome - User Management</title>
+</head>
+
+<body>
+    <!-- Hidden User Session Data -->
+    <div id="userSessionData" style="display: none;">
+        <span id="userEmail"></span>
+        <span id="userFullName"></span>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <span class="sidebar-logo-name">Flavoursome</span>
+                <span class="sidebar-logo-tagline">Super Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <nav class="sidebar-menu">
+            <!-- Main Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Main</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_dashboard.html#dashboard" class="sidebar-menu-link" data-section="dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_requests.html#requests" class="sidebar-menu-link" data-section="requests">
+                            <i class="fas fa-bell"></i>
+                            <span>Administrative Requests</span>
+                            <span id="requestCountBadge" class="badge-counter" style="display:none; background: #EF4444; color: white; border-radius: 10px; padding: 2px 6px; font-size: 0.7em; margin-left: auto;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Management Section -->
+            <div class="sidebar-menu-section">
+                <h4 class="sidebar-menu-title">Management</h4>
+                <ul class="sidebar-menu-list">
+                    <li class="sidebar-menu-item">
+                        <a href="super_users.html#users" class="sidebar-menu-link active" data-section="users">
+                            <i class="fas fa-users"></i>
+                            <span>User Management</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipe_requests.html#recipes" class="sidebar-menu-link" data-section="recipes">
+                            <i class="fas fa-tasks"></i>
+                            <span>Recipe Requests</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_recipes.html#recipesModule" class="sidebar-menu-link" data-section="recipesModule">
+                            <i class="fas fa-utensils"></i>
+                            <span>Recipes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_logs.html#logs" class="sidebar-menu-link" data-section="logs">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Activity Logs</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="super_settings.html#settings" class="sidebar-menu-link" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>System Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name" id="sidebarUsername">Super Admin</div>
+                    <div class="sidebar-user-role">Super Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-title">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="pageTitle">User Management</h1>
+                        <div class="nav-breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span id="breadcrumbCurrent">Users</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationCount">0</span>
+                    </div>
+                    <button class="profile-btn">
+                        <i class="fas fa-user-shield"></i>
+                        <span id="navUsername">Super Admin</span>
+                    </button>
+
+                    <button class="logout-btn-red" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- USERS SECTION -->
+        <div id="usersSection">
+            <section class="users-management">
+                <div class="container">
+                    <!-- User Statistics -->
+                    <div class="stats-grid">
+                        <div class="stat-card total-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalUsersCount">0</h3>
+                                <p>Total Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card approved-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="regularUsersCount">0</h3>
+                                <p>Regular Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card pending-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="adminUsersCount">0</h3>
+                                <p>Admin Users</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card rejected-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-slash"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="blockedUsersCount">0</h3>
+                                <p>Blocked Users</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Filters -->
+                    <div class="user-filter-bar">
+                        <div class="filter-group">
+                            <label><i class="fas fa-user-shield"></i> Role</label>
+                            <select id="roleFilterSelect" class="formal-select">
+                                <option value="all">All Roles</option>
+                                <option value="user">Regular User</option>
+                                <option value="admin">Administrator</option>
+                                <option value="super admin">Super Admin</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label><i class="fas fa-toggle-on"></i> Status</label>
+                            <select id="statusFilterSelect" class="formal-select">
+                                <option value="all">All Status</option>
+                                <option value="active">Active Accounts</option>
+                                <option value="blocked">Blocked Accounts</option>
+                            </select>
+                        </div>
+                        <div class="search-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="userSearchInput" placeholder="Search users by name, username, or email...">
+                        </div>
+                    </div>
+
+                    <!-- Users List -->
+                    <div class="section-header" style="margin-top: 2rem;">
+                        <h2>User Management</h2>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <button class="refresh-btn" onclick="loadUsers()">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <button class="cu-trigger-btn" onclick="openCreateUserModal()">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="usersContainer" class="users-list">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading User Management...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Flavoursome Recipe Finder - Super Admin Panel. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <!-- User Detail Modal -->
+    <div id="userDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="userModalName">User Details</h2>
+                <span class="close-modal" onclick="closeUserDetailModal()">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+            <div class="modal-body" id="userModalBody"></div>
+            <div class="modal-footer" id="userModalFooter"></div>
+        </div>
+    </div>
+
+    <!-- Create User Modal (Full Form) -->
+    <div id="createUserModal" class="cu-overlay">
+        <div class="cu-modal" style="max-width: 900px; max-height: 95vh; overflow-y: auto;">
+            <div class="cu-modal-header" style="position: sticky; top: 0; z-index: 100;">
+                <div class="cu-header-left">
+                    <div class="cu-header-icon"><i class="fas fa-user-plus"></i></div>
+                    <div>
+                        <h2 class="cu-modal-title">Create Account</h2>
+                        <p class="cu-modal-subtitle">Register a comprehensive new user account</p>
+                    </div>
+                </div>
+                <button class="cu-close-btn" onclick="closeCreateUserModal()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <form id="cuFormUser" class="cu-form" style="padding: 20px 30px;" onsubmit="return submitSuperAdminCreateUser(event)">
+                
+                <!-- Role Assignment -->
+                <div class="cu-divider"><span class="cu-divider-text">ROLE ASSIGNMENT</span></div>
+                <div class="cu-form-grid cu-grid-1" style="margin-bottom: 20px;">
+                    <div class="cu-field">
+                        <label class="cu-label">Assigned Role <span class="cu-req">*</span></label>
+                        <select name="role" id="newUserRole" class="cu-input" required style="border-color: var(--primary-blue); border-width: 2px;" onchange="updatePrivilegesPreview(this.value, 'cuPrivilegesContainer')">
+                            <option value="user" selected>User - Restricted access</option>
+                            <option value="admin">Admin - Managerial access</option>
+                            <option value="super admin">Super Admin - Full system access</option>
+                        </select>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Created accounts will default to an <strong>Inactive</strong> status until first login.</p>
+                        <!-- Privileges Preview container -->
+                        <div id="cuPrivilegesContainer" class="cu-privileges-preview" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;"></div>
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="cu-divider"><span class="cu-divider-text">PERSONAL INFORMATION</span></div>
+                <div class="cu-form-grid cu-grid-3">
+                    <div class="cu-field">
+                        <label class="cu-label">ID No <span class="cu-req">*</span></label>
+                        <input type="text" id="idInput" name="idno" class="cu-input" placeholder="xxxx-xxxx" oninput="validateNumber(this)" maxlength="9">
+                        <p id="message3" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">First Name <span class="cu-req">*</span></label>
+                        <input type="text" id="firstName" name="firstname" class="cu-input" oninput="validateName(this)" maxlength="30">
+                        <label for="message" id="message" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Middle Name <span style="font-size: 12px; color: var(--text-secondary);">(Optional)</span></label>
+                        <input type="text" id="middleInitial" name="middleinitial" class="cu-input" oninput="validateMid(this)" maxlength="30">
+                        <label for="message12" id="message12" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Last Name <span class="cu-req">*</span></label>
+                        <input type="text" id="lastName" name="lastname" class="cu-input" oninput="validateLast(this)" maxlength="20">
+                        <label for="message2" id="message2" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Extension Name <span style="font-size: 12px; color: var(--text-secondary);">(Optional)</span></label>
+                        <input type="text" id="extensionName" name="exname" class="cu-input" maxlength="4" oninput="validateEx(this)">
+                        <p id="message22" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Sex <span class="cu-req">*</span></label>
+                        <select id="sex" name="Sex" class="cu-input" oninput="validateSex(this)">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                        <p id="message90" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Birthdate <span class="cu-req">*</span></label>
+                        <input type="date" id="custom-birthdate" name="birthdate" class="cu-input" onchange="calculateAge()">
+                        <label id="message16" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Age <span class="cu-req">*</span></label>
+                        <input type="number" id="custom-age" name="age" class="cu-input" readonly style="background: #f1f5f9;">
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div class="cu-divider"><span class="cu-divider-text">ACCOUNT INFORMATION</span></div>
+                <div class="cu-form-grid cu-grid-2">
+                    <div class="cu-field">
+                        <label class="cu-label">Email <span class="cu-req">*</span></label>
+                        <input type="text" id="emailInput" name="email" class="cu-input" oninput="validateEmail(this)" maxlength="30">
+                        <p id="message5" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Username <span class="cu-req">*</span></label>
+                        <input type="text" id="username" name="username" class="cu-input" oninput="validateUser(this)" maxlength="20">
+                        <p id="message4" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Password <span class="cu-req">*</span></label>
+                        <input type="password" name="password" id="password" class="cu-input" oninput="validatePasswordStrength(this.value)">
+                        <div style="margin-top: 5px; font-size: 0.85rem; display: flex; align-items: center; justify-content: space-between;">
+                            <label><input type="checkbox" onclick="togglePassword('password')"> Show Password</label>
+                        </div>
+                        <p id="mess" style="display:none; margin: 4px 0;"><span id="stret" style="font-size: 13px;"></span></p>
+                        <p id="message95" style="color: red; font-size: 13px;"></p>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Confirm Password <span class="cu-req">*</span></label>
+                        <input type="password" name="repassword" id="confirmPassword" class="cu-input" oninput="validatePasswordMatch(document.getElementById('password').value, this.value, document.getElementById('message100'))">
+                        <div style="margin-top: 5px; font-size: 0.85rem;">
+                            <label><input type="checkbox" onclick="togglePassword('confirmPassword')"> Show Password</label>
+                        </div>
+                        <label id="message100" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                </div>
+
+                <!-- Address Info -->
+                <div class="cu-divider"><span class="cu-divider-text">ADDRESS INFORMATION</span></div>
+                <div class="cu-form-grid cu-grid-3">
+                    <div class="cu-field">
+                        <label class="cu-label">Purok <span class="cu-req">*</span></label>
+                        <input type="text" id="purok" name="Purok" class="cu-input" oninput="validatePurok(this)">
+                        <label id="message96" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Barangay <span class="cu-req">*</span></label>
+                        <input type="text" id="barangay" name="Barangay" class="cu-input" oninput="validateBarangay(this)">
+                        <label id="message7" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">City/Municipality <span class="cu-req">*</span></label>
+                        <input type="text" id="city" name="City" class="cu-input" oninput="validateCity(this)">
+                        <label id="message8" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Province <span class="cu-req">*</span></label>
+                        <input type="text" id="province" name="Province" class="cu-input" oninput="validateProvince(this)">
+                        <label id="message9" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">Country <span class="cu-req">*</span></label>
+                        <input type="text" id="country" name="Country" class="cu-input" oninput="validateCountry(this)">
+                        <label id="message10" style="color: red; font-size: 13px; margin-top: 4px; display:block;"></label>
+                    </div>
+                    <div class="cu-field">
+                        <label class="cu-label">ZIP Code <span class="cu-req">*</span></label>
+                        <input type="text" id="zipCode" name="Z_code" class="cu-input" oninput="validateZip(this)" maxlength="4">
+                        <p id="message11" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                </div>
+
+                <!-- Security Info -->
+                <div class="cu-divider"><span class="cu-divider-text">SECURITY VERIFICATION</span></div>
+                <div class="cu-form-grid cu-grid-3" style="gap: 15px;">
+                    <!-- Question 1 Block -->
+                    <div class="cu-field">
+                        <label class="cu-label">Security Question 1 <span class="cu-req">*</span></label>
+                        <select name="security_q1" class="cu-input" onchange="validateSecurityAnswer(1)" style="margin-bottom: 10px;">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        
+                        <label class="cu-label">Answer 1 <span class="cu-req">*</span></label>
+                        <div style="position: relative;">
+                            <input type="password" name="answer1" id="answer1" class="cu-input" placeholder="Your Answer" oninput="validateSecurityAnswer(1)">
+                            <i class="fas fa-eye" onclick="toggleVisibility('answer1', this)" style="position: absolute; right: 15px; top: 12px; cursor: pointer; color: #888;"></i>
+                        </div>
+                        <p id="error-q1" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                    
+                    <!-- Question 2 Block -->
+                    <div class="cu-field">
+                        <label class="cu-label">Security Question 2 <span class="cu-req">*</span></label>
+                        <select name="security_q2" class="cu-input" onchange="validateSecurityAnswer(2)" style="margin-bottom: 10px;">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        
+                        <label class="cu-label">Answer 2 <span class="cu-req">*</span></label>
+                        <div style="position: relative;">
+                            <input type="password" name="answer2" id="answer2" class="cu-input" placeholder="Your Answer" oninput="validateSecurityAnswer(2)">
+                            <i class="fas fa-eye" onclick="toggleVisibility('answer2', this)" style="position: absolute; right: 15px; top: 12px; cursor: pointer; color: #888;"></i>
+                        </div>
+                        <p id="error-q2" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+
+                    <!-- Question 3 Block -->
+                    <div class="cu-field">
+                        <label class="cu-label">Security Question 3 <span class="cu-req">*</span></label>
+                        <select name="security_q3" class="cu-input" onchange="validateSecurityAnswer(3)" style="margin-bottom: 10px;">
+                            <option value="" disabled selected>Loading questions...</option>
+                        </select>
+                        
+                        <label class="cu-label">Answer 3 <span class="cu-req">*</span></label>
+                        <div style="position: relative;">
+                            <input type="password" name="answer3" id="answer3" class="cu-input" placeholder="Your Answer" oninput="validateSecurityAnswer(3)">
+                            <i class="fas fa-eye" onclick="toggleVisibility('answer3', this)" style="position: absolute; right: 15px; top: 12px; cursor: pointer; color: #888;"></i>
+                        </div>
+                        <p id="error-q3" style="color: red; font-size: 13px; margin-top: 4px;"></p>
+                    </div>
+                </div>
+
+                <div class="cu-form-actions" style="margin-top: 30px; position: sticky; bottom: 0; background: #fff; padding: 15px 0; border-top: 1px solid #eee;">
+                    <button type="button" class="cu-btn-cancel" onclick="closeCreateUserModal()">Cancel</button>
+                    <button type="submit" class="cu-btn-submit" id="suSubmitBtn">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Role Modal -->
+    <div id="roleChangeModal" class="cu-overlay">
+        <div class="cu-modal" style="max-width: 500px;">
+            <div class="cu-modal-header">
+                <div class="cu-header-left">
+                    <div class="cu-header-icon" style="background: rgba(124, 58, 237, 0.2); color: #7c3aed;"><i class="fas fa-user-tag"></i></div>
+                    <div><h2 class="cu-modal-title" style="color: #fff;">Change User Role</h2></div>
+                </div>
+                <span class="cu-close-btn" onclick="closeRoleChangeModal()"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="cu-form">
+                <input type="hidden" id="roleChangeUserId">
+                <label style="color:#94a3b8; font-size:0.85rem; display:block; margin-bottom:0.5rem;">Select new role:</label>
+                <select id="newRoleSelect" class="cu-input cu-select" onchange="updateRoleChangePreview(this.value)">
+                    <option value="user">User - Restricted access</option>
+                    <option value="admin">Admin - Managerial access</option>
+                    <option value="super admin">Super Admin - Full system access</option>
+                </select>
+                <div id="roleChangePrivilegesPreview" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem;"></div>
+                <div class="cu-form-actions">
+                    <button class="cu-btn-cancel" onclick="closeRoleChangeModal()">Cancel</button>
+                    <button class="cu-btn-submit" id="roleChangeSubmitBtn" onclick="submitRoleChange()">
+                        <i class="fas fa-check"></i> Update Role
+                    </button>
+                </div>
+            </div>
+            <div id="roleChangeSuccessMsg" style="display:none; padding:1.5rem; text-align:center;">
+                <i class="fas fa-check-circle" style="font-size:2.5rem; color:#10B981; margin-bottom:1rem;"></i>
+                <p id="roleChangeSuccessText" style="color:#f1f5f9; font-size:1rem; margin-bottom:1.25rem;">Role updated successfully.</p>
+                <button class="cu-btn-submit" onclick="finishRoleChange()">
+                    <i class="fas fa-check"></i> Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
+        <div style="background:#1e293b; border:1px solid #334155; border-radius:16px; padding:2rem; max-width:440px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.5); text-align:center;">
+            <div style="width:64px; height:64px; background:rgba(239,68,68,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem;">
+                <i class="fas fa-exclamation-triangle" style="font-size:1.75rem; color:#EF4444;"></i>
+            </div>
+            <h2 style="color:#f1f5f9; font-size:1.3rem; margin-bottom:0.5rem;">Delete Account?</h2>
+            <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:0.5rem;">You are about to permanently delete:</p>
+            <p id="deleteConfirmUsername" style="color:#f87171; font-weight:600; font-size:1rem; margin-bottom:1.5rem; word-break:break-all;"></p>
+            <p style="color:#64748b; font-size:0.85rem; margin-bottom:1.75rem;">This action <strong style='color:#EF4444;'>cannot be undone</strong>. All user data will be permanently removed.</p>
+            <input type="hidden" id="deleteConfirmUserId">
+            <div style="display:flex; gap:1rem; justify-content:center;">
+                <button onclick="closeDeleteConfirmModal()" style="padding:0.65rem 1.5rem; border-radius:8px; border:1px solid #475569; background:transparent; color:#94a3b8; cursor:pointer; font-size:0.95rem; transition:all 0.2s;"
+                    onmouseover="this.style.background='#334155'" onmouseout="this.style.background='transparent'">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button id="deleteConfirmBtn" onclick="confirmDeleteUser()" style="padding:0.65rem 1.5rem; border-radius:8px; border:none; background:linear-gradient(135deg,#EF4444,#DC2626); color:white; cursor:pointer; font-size:0.95rem; font-weight:600; transition:all 0.2s;"
+                    onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                    <i class="fas fa-trash"></i> Yes, Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="Jscript/admin_dashboard.js"></script>
+    <script src="Jscript/super_users.js"></script>
+    <script src="Jscript/admin_create_user.js"></script>
+    
+    <!-- Registration Scripts for Create User Modal -->
+    <script src="Jscript/java.js"></script>
+    <script src="Jscript/get_question.js"></script>
+    
+    <!-- Include SweetAlert2 for modal alerts generated by java.js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Sidebar mobile logic
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        // Initialize Super Admin user management
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof initializeUserManagement === 'function') {
+                initializeUserManagement();
+            }
+        });
+    </script>
+    <script src="Jscript/account_status_checker.js"></script>
+</body>
+</html>
